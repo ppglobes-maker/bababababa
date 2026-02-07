@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RealAndRare - Top Up</title>
+    <link rel="canonical" href="https://realandrare.bid/topup.html">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#111111">
+    <link rel="preload" as="image" href="img/rare.webp">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Organization",
+                "name": "RealAndRare",
+                "url": "https://realandrare.bid/",
+                "logo": "https://realandrare.bid/resources/logo/gold.png"
+            },
+            {
+                "@type": "WebSite",
+                "name": "RealAndRare",
+                "url": "https://realandrare.bid/"
+            }
+        ]
+    }
+    </script>
+    <link rel="stylesheet" href="resources/css/app.min.css">
+    <style>
+        body {
+            background: linear-gradient(120deg, rgba(0,0,0,0.55), rgba(0,0,0,0.25)), url("img/rare.webp") center/cover fixed;
+            color: #f1f1f1;
+            font-family: 'Nunito', sans-serif;
+        }
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 24px;
+            background: radial-gradient(circle at 10% 20%, rgba(216,180,1,0.12), rgba(0,0,0,0.7)),
+                        radial-gradient(circle at 90% 10%, rgba(255,255,255,0.08), rgba(0,0,0,0.8));
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            position: relative;
+            z-index: 1200;
+            overflow: visible;
+        }
+        .nav-toggle {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.06);
+            color: #f1f1f1;
+            cursor: pointer;
+        }
+        .nav-toggle:hover { border-color: rgba(216,180,1,0.35); }
+        .nav-toggle svg { width: 22px; height: 22px; }
+        .nav-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-right: 18px;
+            color: #f1f1f1;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .nav-links a:last-child { margin-right: 0; }
+        .nav-links a:hover { color: #d8b401; }
+        .nav-links svg { width: 16px; height: 16px; }
+        .right { display: flex; align-items: center; gap: 18px; }
+        .profile { display: flex; align-items: center; gap: 12px; }
+        .profile svg { width: 40px; height: 40px; padding: 8px; border-radius: 50%; background: rgba(255, 255, 255, 0.08); }
+        .meta { display: grid; grid-template-columns: repeat(2, minmax(110px, auto)); gap: 8px 16px; align-items: center; }
+        .badge {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 8px 12px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #f1f1f1;
+        }
+        .topup-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 12px;
+            border-radius: 10px;
+            background: #d8b401;
+            color: #000;
+            font-weight: 800;
+            text-decoration: none;
+            border: 1px solid rgba(0,0,0,0.2);
+            white-space: nowrap;
+        }
+        .topup-btn:hover { background: #f1d23a; }
+        .btc-icon { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; background: #f7931a; color: #000; font-weight: 800; font-size: 11px; }
+        .label { opacity: 0.75; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; }
+        .muted { opacity: 0.8; font-size: 13px; }
+        .content { padding: 28px; display: grid; gap: 16px; max-width: 1200px; width: 100%; margin: 0 auto; }
+        .card { background: rgba(0, 0, 0, 0.35); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 22px 24px; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+        .card h2 { margin: 0 0 6px 0; }
+        .form-row { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+        label { font-size: 13px; opacity: 0.85; display: flex; flex-direction: column; gap: 6px; }
+        input, select { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); color: #f1f1f1; padding: 10px 12px; border-radius: 10px; }
+        button.action { background: #d8b401; color: #000; border: none; padding: 10px 14px; border-radius: 10px; font-weight: 800; cursor: pointer; }
+        button.action:hover { background: #f1d23a; }
+        .row { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); align-items: start; }
+        .qr-box { border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 14px; background: rgba(255,255,255,0.03); display: flex; flex-direction: column; gap: 8px; }
+        .status-pill { display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 10px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); font-weight: 700; }
+        .mono { font-family: "Courier New", monospace; word-break: break-all; }
+        .warn-text { color: #e04d4d; font-weight: 700; }
+        .popup {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.65);
+            z-index: 2000;
+            padding: 20px;
+        }
+        .popup.open { display: flex; }
+        .popup-card {
+            background: #111;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 12px;
+            padding: 16px 18px;
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.45);
+        }
+        .popup-card h3 { margin: 0 0 8px 0; }
+        .footer { text-align: center; padding: 18px 12px 26px; color: rgba(241,241,241,0.7); font-size: 12px; letter-spacing: 0.6px; }
+        @media (max-width: 768px) {
+            /* Keep the top row on one line, but let the hamburger menu take a full second row when opened */
+            .navbar { position: relative; display: flex !important; align-items: center; justify-content: space-between; gap: 10px; padding: 0 12px; min-height: 56px; height: auto; flex-wrap: wrap !important; }
+            .navbar .nav-toggle { display: inline-flex; flex: 0 0 auto; width: 36px; height: 36px; border-radius: 10px; }
+            .navbar .right { display: flex; align-items: center; justify-content: flex-end; gap: 10px; flex-wrap: nowrap !important; min-width: 0; flex: 1 1 auto; }
+            .navbar .profile { margin-top: 0 !important; text-align: left !important; min-width: 0; gap: 8px; height: 36px; padding: 6px 10px; border-radius: 12px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); align-items: center; flex: 0 1 auto; align-self: center; }
+            .navbar .profile svg { width: 18px; height: 18px; padding: 0; display: block; background: transparent !important; }
+            .navbar .profile > div { display: flex; align-items: center; }
+            .navbar .profile .muted { display: none; }
+            .navbar #username { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 90px; line-height: 1; }
+            .navbar .meta { display: flex; align-items: center; gap: 8px; flex-wrap: nowrap; }
+            .navbar .meta > div { display: flex; flex-direction: column; }
+            .navbar .meta .label { display: none; }
+            .navbar .badge { padding: 6px 10px; font-size: 12px; white-space: nowrap; line-height: 1; height: 36px; border-radius: 12px; }
+            .navbar .btc-icon { width: 16px; height: 16px; font-size: 10px; }
+            .navbar .topup-btn { padding: 6px 10px; font-size: 12px; height: 36px; border-radius: 12px; }
+            .navbar .nav-toggle { order: 1; }
+            .navbar .right { order: 2; }
+            /* Menu opens under the top row (in-flow), pushing content down */
+            .navbar .nav-links { display: none; width: 100%; order: 3; position: static; flex-direction: column; gap: 8px; padding: 10px; margin: 0 0 10px 0; border-radius: 12px; background: rgba(0, 0, 0, 0.55); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+            .navbar .nav-links.open { display: flex; }
+            .navbar .nav-links a { margin-right: 0; padding: 10px 10px; border-radius: 10px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); }
+            .content { padding: 10px 12px 14px; }
+        }
+        @media (max-width: 768px) {
+            #username { max-width: 60px; }
+            .navbar { gap: 8px; padding: 0 10px; min-height: 52px; height: auto; }
+            .navbar .right { gap: 8px; }
+            .navbar .badge { padding: 5px 8px; font-size: 11px; height: 34px; border-radius: 12px; }
+            .navbar .profile { padding: 5px 8px; height: 34px; }
+            .navbar .topup-btn { padding: 5px 8px; font-size: 11px; height: 34px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 6h16"></path>
+                <path d="M4 12h16"></path>
+                <path d="M4 18h16"></path>
+            </svg>
+        </button>
+        <div class="nav-links">
+            <a href="shop.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 7h12l-1 12H7L6 7z"></path><path d="M9 7V5a3 3 0 0 1 6 0v2"></path>
+                </svg>
+                Shop
+            </a>
+            <a href="dumps.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <ellipse cx="12" cy="5" rx="7" ry="3"></ellipse><path d="M5 5v6c0 1.6 3.1 3 7 3s7-1.4 7-3V5"></path><path d="M5 11v6c0 1.6 3.1 3 7 3s7-1.4 7-3v-6"></path>
+                </svg>
+                Dumps
+            </a>
+            <a href="checkers.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="m9 12 2 2 4-4"></path>
+                </svg>
+                Checkers
+            </a>
+            <a href="orders.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M7 5h10"></path><path d="M7 9h10"></path><path d="M7 13h6"></path><rect x="5" y="3" width="14" height="18" rx="2"></rect>
+                </svg>
+                Orders
+            </a>
+            <a href="support.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 9a7 7 0 0 1 14 0v6a4 4 0 0 1-4 4h-1"></path><path d="M5 13v2a4 4 0 0 0 4 4h1"></path><path d="M8 21h3"></path><path d="M18 13h2"></path><path d="M4 13H2"></path>
+                </svg>
+                Support
+            </a>
+            <a href="dashboard.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect>
+                </svg>
+                Dashboard
+            </a>
+        </div>
+        <div class="right">
+            <div class="profile">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#d8b401" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="7" r="4"></circle>
+                    <path d="M5 21c0-4 3-7 7-7s7 3 7 7"></path>
+                </svg>
+                <div>
+                    <div id="username" style="font-weight:700;">User</div>
+                    <div class="muted">Top up</div>
+                </div>
+            </div>
+            <div class="meta">
+                <div>
+                    <div class="label">Bitcoin</div>
+                    <div class="badge" id="btc-price"><span class="btc-icon">฿</span> $--.--</div>
+                </div>
+                <div>
+                    <div class="label">Balance</div>
+                    <div class="badge" id="balance">$0.00</div>
+                </div>
+            </div>
+            <a class="topup-btn" href="topup.html">Top up</a>
+        </div>
+    </nav>
+
+    <div class="content">
+        <div class="card">
+            <h2>Top up balance (BTC)</h2>
+            <div class="muted">Address change automatically after a successful top-up.</div>
+            <!-- <div style="display:flex; gap:10px; flex-wrap:wrap; margin:12px 0 4px;">
+                <span class="status-pill" id="status-pill">Loading address…</span>
+            </div> -->
+            <div class="row">
+                <div class="qr-box" style="align-items:center;">
+                    <strong>QR code</strong>
+                    <img id="qr-img" alt="Payment QR" style="width:240px;height:240px;border-radius:12px;background:rgba(255,255,255,0.04);" />
+                    <div style="width:100%;">
+                        <div class="muted">Bitcoin address</div>
+                        <div class="mono" id="pay-address">—</div>
+                    </div>
+                </div>
+            </div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap; margin:14px 0 6px;">
+                <button class="action" type="button" id="btn-new-address">New address</button>
+            </div>
+            <div class="warn-text">Do Not Change Address When There's Any Unconfirmed Transactions</div>
+            <div class="muted" style="margin-top:6px;">Required confirmations: 2</div>
+            <div class="muted" style="margin-top:10px;">
+                After successful payment, your balance will be updated automatically. If it doesn't update within 30 minutes, please contact support.
+            </div>
+        </div>
+        <div class="popup" id="popup">
+            <div class="popup-card">
+                <h3>Address in use</h3>
+                <div class="muted">Unused address could not be changed. Please wait until the current payment is completed or expires.</div>
+                <div style="margin-top:12px;">
+                    <button class="action" type="button" id="popup-close">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = (() => {
+            const host = window.location.host || '';
+            const hostname = window.location.hostname || '';
+            if (hostname === 'localhost' || hostname === '127.0.0.1') {
+                if (host.includes('5500')) return 'http://127.0.0.1:3000';
+                return '';
+            }
+            return '';
+        })();
+
+        async function fetchBTC() {
+            const badge = document.getElementById('btc-price');
+            try {
+                const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
+                const data = await res.json();
+                const price = data?.bitcoin?.usd;
+                if (price) { badge.innerHTML = '<span class="btc-icon">฿</span> $' + price.toLocaleString(); return; }
+            } catch(e){}
+            try {
+                const res2 = await fetch('https://api.coindesk.com/v1/bpi/currentprice/USD.json');
+                const data2 = await res2.json();
+                const price = data2?.bpi?.USD?.rate_float;
+                if (price) { badge.innerHTML = '<span class="btc-icon">฿</span> $' + Math.round(price).toLocaleString(); return; }
+            } catch(e){}
+            badge.textContent = '฿ $--.--';
+        }
+        fetchBTC();
+
+        const storageKey = 'rar_topup_payment_v2';
+        const userKey = 'rar_user_id';
+        function savePaymentCache(obj) { localStorage.setItem(storageKey, JSON.stringify(obj)); }
+        function loadPaymentCache() { try { return JSON.parse(localStorage.getItem(storageKey) || 'null'); } catch(e){ return null; } }
+        function getUserId() {
+            const savedUsername = localStorage.getItem('rar_username');
+            if (savedUsername) return savedUsername;
+            const fromUrl = new URLSearchParams(window.location.search).get('user');
+            if (fromUrl) {
+                localStorage.setItem(userKey, fromUrl);
+                return fromUrl;
+            }
+            let id = localStorage.getItem(userKey);
+            if (!id) {
+                id = 'user_' + Math.random().toString(36).slice(2, 10);
+                localStorage.setItem(userKey, id);
+            }
+            return id;
+        }
+
+        function setStatus(text) {
+            const statusEl = document.getElementById('status-pill');
+            if (statusEl) statusEl.textContent = text;
+        }
+        function setDetails({pay_address}) {
+            document.getElementById('pay-address').textContent = pay_address || '—';
+            if (pay_address) {
+                document.getElementById('qr-img').src = 'https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=' + encodeURIComponent(pay_address);
+            } else {
+                document.getElementById('qr-img').removeAttribute('src');
+            }
+        }
+
+        async function createPayment() {
+            const userId = getUserId();
+
+            setStatus('Creating...');
+            try {
+                const res = await fetch(API_BASE + '/api/np/payment', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ user_id: userId })
+                });
+                const data = await res.json().catch(() => ({ message: 'Server not running' }));
+                if (!res.ok) throw new Error(data?.message || 'Failed to create payment');
+                const payload = {
+                    pay_address: data.pay_address,
+                    pay_amount: data.pay_amount,
+                    pay_currency: data.pay_currency,
+                    order_id: data.order_id,
+                    payment_id: data.payment_id
+                };
+                savePaymentCache(payload);
+                setDetails(payload);
+                setStatus('Address ready');
+                return payload;
+            } catch (err) {
+                console.error(err);
+                setStatus('Error: ' + err.message);
+                alert('Error creating payment: ' + err.message);
+            }
+        }
+
+        async function requestNewAddress() {
+            const userId = getUserId();
+            setStatus('Creating new address...');
+            try {
+                const res = await fetch(API_BASE + '/api/np/payment/new', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ user_id: userId })
+                });
+                const data = await res.json().catch(() => ({}));
+                if (!res.ok) {
+                    if (res.status === 409) {
+                        setStatus('Address ready');
+                        showPopup(true);
+                        return;
+                    }
+                    throw new Error(data?.message || 'Failed to create payment');
+                }
+                const payload = {
+                    pay_address: data.pay_address,
+                    pay_amount: data.pay_amount,
+                    pay_currency: data.pay_currency,
+                    order_id: data.order_id,
+                    payment_id: data.payment_id
+                };
+                savePaymentCache(payload);
+                setDetails(payload);
+                setStatus('Address ready');
+            } catch (err) {
+                console.error(err);
+                setStatus('Error: ' + err.message);
+                alert('Error creating payment: ' + err.message);
+            }
+        }
+
+        async function refreshStatus() {
+            const cached = loadPaymentCache();
+            if (!cached || !cached.payment_id) { setStatus('No payment yet'); return; }
+            setStatus('Checking...');
+            try {
+                const res = await fetch(API_BASE + '/api/np/payment/' + cached.payment_id);
+                const data = await res.json();
+                if (!res.ok) throw new Error(data?.message || 'Failed to fetch status');
+                setStatus(data.payment_status || 'Unknown');
+            } catch (err) {
+                console.error(err);
+                setStatus('Error: ' + err.message);
+            }
+        }
+
+        async function pollUserPayments() {
+            const userId = getUserId();
+            try {
+                const res = await fetch(API_BASE + '/api/np/poll/' + encodeURIComponent(userId));
+                const data = await res.json();
+                if (!res.ok) return;
+                if (data && typeof data.balance_usd === 'number') {
+                    const value = data.balance_usd.toFixed(2);
+                    localStorage.setItem('rar_balance', value);
+                    document.getElementById('balance').textContent = '$' + value;
+                }
+                if (data?.latest_status) {
+                    setStatus(data.latest_status);
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        (async function initTopup() {
+            const displayName = localStorage.getItem('rar_username') || 'User';
+            const userLabel = document.getElementById('username');
+            if (userLabel) userLabel.textContent = displayName;
+
+            const cached = loadPaymentCache();
+            if (cached) { setDetails(cached); setStatus('Address ready'); }
+            await createPayment();
+            // sync balance in navbar
+            const userId = getUserId();
+            try {
+                const res = await fetch(API_BASE + '/api/user/' + encodeURIComponent(userId));
+                const data = await res.json();
+                if (res.ok && data && typeof data.balance_usd === 'number') {
+                    document.getElementById('balance').textContent = '$' + data.balance_usd.toFixed(2);
+                }
+            } catch (e) {}
+
+            await pollUserPayments();
+            setInterval(pollUserPayments, 15000);
+        })();
+
+        function showPopup(open) {
+            const popup = document.getElementById('popup');
+            if (!popup) return;
+            popup.classList.toggle('open', !!open);
+        }
+
+        const newBtn = document.getElementById('btn-new-address');
+        if (newBtn) newBtn.addEventListener('click', requestNewAddress);
+        const popupClose = document.getElementById('popup-close');
+        if (popupClose) popupClose.addEventListener('click', () => showPopup(false));
+
+        (function () {
+            const toggle = document.querySelector('.nav-toggle');
+            const links = document.querySelector('.nav-links');
+            if (!toggle || !links) return;
+            toggle.addEventListener('click', () => {
+                const open = links.classList.toggle('open');
+                toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            });
+            links.querySelectorAll('a').forEach(a => {
+                a.addEventListener('click', () => {
+                    links.classList.remove('open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                });
+            });
+        })();
+    </script>
+    <footer class="footer">realandrare.bid</footer>
+</body>
+</html>
+

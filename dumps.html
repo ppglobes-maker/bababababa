@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RealAndRare - Dumps</title>
+    <link rel="canonical" href="https://realandrare.bid/dumps.html">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preload" as="image" href="img/rare.webp">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Organization",
+                "name": "RealAndRare",
+                "url": "https://realandrare.bid/",
+                "logo": "https://realandrare.bid/resources/logo/gold.png"
+            },
+            {
+                "@type": "WebSite",
+                "name": "RealAndRare",
+                "url": "https://realandrare.bid/"
+            }
+        ]
+    }
+    </script>
+    <link rel="stylesheet" href="resources/css/app.min.css">
+    <style>
+        body { background: linear-gradient(120deg, rgba(0,0,0,0.55), rgba(0,0,0,0.25)), url("img/rare.webp") center/cover fixed; color: #f1f1f1; font-family: 'Nunito', sans-serif; }
+        .navbar { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; background: radial-gradient(circle at 10% 20%, rgba(216,180,1,0.12), rgba(0,0,0,0.7)), radial-gradient(circle at 90% 10%, rgba(255,255,255,0.08), rgba(0,0,0,0.8)); border-bottom: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); position: relative; z-index: 1200; overflow: visible; }
+        .nav-toggle { display: none; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.12); background: rgba(255, 255, 255, 0.06); color: #f1f1f1; cursor: pointer; }
+        .nav-toggle:hover { border-color: rgba(216,180,1,0.35); } .nav-toggle svg { width: 22px; height: 22px; }
+        .nav-links a { display: inline-flex; align-items: center; gap: 8px; margin-right: 18px; color: #f1f1f1; text-decoration: none; font-weight: 600; }
+        .nav-links a:last-child { margin-right: 0; } .nav-links a:hover { color: #d8b401; }
+        .nav-links svg { width: 16px; height: 16px; }
+        .right { display: flex; align-items: center; gap: 18px; } .profile { display: flex; align-items: center; gap: 12px; }
+        .profile svg { width: 40px; height: 40px; padding: 8px; border-radius: 50%; background: rgba(255, 255, 255, 0.08); }
+        .meta { display: grid; grid-template-columns: repeat(2, minmax(110px, auto)); gap: 8px 16px; align-items: center; }
+        .badge { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 8px 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; color: #f1f1f1; }
+        .topup-btn { display: inline-flex; align-items: center; justify-content: center; padding: 8px 12px; border-radius: 10px; background: #d8b401; color: #000; font-weight: 800; text-decoration: none; border: 1px solid rgba(0,0,0,0.2); white-space: nowrap; }
+        .topup-btn:hover { background: #f1d23a; }
+        .btc-icon { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; background: #f7931a; color: #000; font-weight: 800; font-size: 11px; }
+        .label { opacity: 0.75; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; }
+        .muted { opacity: 0.8; font-size: 13px; }
+        .content { padding: 28px; display: grid; gap: 16px; max-width: 1200px; width: 100%; margin: 0 auto; }
+        .card { background: rgba(0, 0, 0, 0.35); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 18px 20px; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+        .card h2 { margin: 0 0 6px 0; }
+        .list { display: grid; gap: 12px; }
+        .entry { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); padding: 12px 14px; border-radius: 10px; }
+        .entry-actions { display: inline-flex; align-items: center; gap: 10px; }
+        .buy-btn { padding: 8px 12px; border-radius: 8px; background: #d8b401; color: #000; font-weight: 700; border: none; cursor: pointer; }
+        .buy-btn:hover { background: #f1d23a; }
+        .filters { display: flex; flex-wrap: wrap; gap: 10px; margin: 14px 0 6px; }
+        .filters select { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #f1f1f1; padding: 8px 10px; border-radius: 8px; min-width: 140px; }
+        .filters label { font-size: 12px; opacity: 0.8; display: flex; flex-direction: column; gap: 4px; }
+        .pagination { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+        .page-btn { padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: #f1f1f1; cursor: pointer; }
+        .page-btn.active { background: rgba(216,180,1,0.16); border-color: rgba(216,180,1,0.4); color: #fce77c; }
+        .page-btn:hover { border-color: rgba(216,180,1,0.35); }
+        .page-btn.disabled { opacity: 0.45; cursor: not-allowed; }
+        .dots { opacity: 0.6; padding: 8px 0; }
+        .footer { text-align: center; padding: 18px 12px 26px; color: rgba(241,241,241,0.7); font-size: 12px; letter-spacing: 0.6px; }
+        .popup {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.65);
+            z-index: 2000;
+            padding: 20px;
+        }
+        .popup.open { display: flex; }
+        .popup-card {
+            background: #111;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 12px;
+            padding: 16px 18px;
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.45);
+        }
+        .popup-card h3 { margin: 0 0 8px 0; }
+        .popup-actions { display: flex; gap: 10px; justify-content: center; margin-top: 12px; flex-wrap: wrap; }
+        @media (max-width: 768px) {
+            /* One-line top row + in-flow hamburger menu that pushes content down */
+            .navbar { position: relative; display: flex !important; align-items: center; justify-content: space-between; gap: 10px; padding: 0 12px; min-height: 56px; height: auto; flex-wrap: wrap !important; }
+            .navbar .nav-toggle, .nav-toggle { display: inline-flex; flex: 0 0 auto; width: 36px; height: 36px; border-radius: 10px; order: 1; }
+            .navbar .right, .right { display: flex; align-items: center; justify-content: flex-end; gap: 10px; flex-wrap: nowrap !important; min-width: 0; flex: 1 1 auto; width: auto; order: 2; }
+
+            /* app.min.css sets `.profile { margin-top: 75px }` on mobile; override for navbar */
+            .navbar .profile { margin-top: 0 !important; text-align: left !important; min-width: 0; gap: 8px; height: 36px; padding: 6px 10px; border-radius: 12px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); align-items: center; align-self: center; }
+            .navbar .profile svg { width: 18px; height: 18px; padding: 0; display: block; background: transparent !important; }
+            .navbar .profile > div { display: flex; align-items: center; }
+            .navbar .profile .muted { display: none; }
+            .navbar #username { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 90px; line-height: 1; }
+
+            .navbar .meta, .meta { display: flex; align-items: center; gap: 8px; flex-wrap: nowrap; width: auto; }
+            .navbar .meta > div { display: flex; flex-direction: column; }
+            .navbar .meta .label { display: none; }
+            .navbar .badge { padding: 6px 10px; font-size: 12px; white-space: nowrap; line-height: 1; height: 36px; border-radius: 12px; }
+            .navbar .btc-icon { width: 16px; height: 16px; font-size: 10px; }
+            .navbar .topup-btn { padding: 6px 10px; font-size: 12px; height: 36px; border-radius: 12px; }
+
+            /* Menu opens under the top row (in-flow), pushing content down */
+            .navbar .nav-links { display: none; width: 100%; order: 3; position: static; flex-direction: column; gap: 8px; padding: 10px; margin: 0 0 10px 0; border-radius: 12px; background: rgba(0, 0, 0, 0.55); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+            .navbar .nav-links.open { display: flex; }
+            .navbar .nav-links a { margin-right: 0; padding: 10px 10px; border-radius: 10px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); }
+            .content { padding: 10px 12px 14px; }
+        }
+        @media (max-width: 420px) {
+            .navbar { gap: 8px; padding: 0 10px; min-height: 52px; }
+            .navbar .right { gap: 8px; }
+            .navbar .badge { padding: 5px 8px; font-size: 11px; height: 34px; border-radius: 12px; }
+            .navbar .profile { padding: 5px 8px; height: 34px; }
+            .navbar .topup-btn { padding: 5px 8px; font-size: 11px; height: 34px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 6h16"></path>
+                <path d="M4 12h16"></path>
+                <path d="M4 18h16"></path>
+            </svg>
+        </button>
+        <div class="nav-links">
+            <a href="shop.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 7h12l-1 12H7L6 7z"></path><path d="M9 7V5a3 3 0 0 1 6 0v2"></path>
+                </svg>
+                Shop
+            </a>
+            <a href="dumps.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <ellipse cx="12" cy="5" rx="7" ry="3"></ellipse><path d="M5 5v6c0 1.6 3.1 3 7 3s7-1.4 7-3V5"></path><path d="M5 11v6c0 1.6 3.1 3 7 3s7-1.4 7-3v-6"></path>
+                </svg>
+                Dumps
+            </a>
+            <a href="checkers.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="m9 12 2 2 4-4"></path>
+                </svg>
+                Checkers
+            </a>
+            <a href="orders.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M7 5h10"></path><path d="M7 9h10"></path><path d="M7 13h6"></path><rect x="5" y="3" width="14" height="18" rx="2"></rect>
+                </svg>
+                Orders
+            </a>
+            <a href="support.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 9a7 7 0 0 1 14 0v6a4 4 0 0 1-4 4h-1"></path><path d="M5 13v2a4 4 0 0 0 4 4h1"></path><path d="M8 21h3"></path><path d="M18 13h2"></path><path d="M4 13H2"></path>
+                </svg>
+                Support
+            </a>
+            <a href="dashboard.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect>
+                </svg>
+                Dashboard
+            </a>
+        </div>
+        <div class="right">
+            <div class="profile">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#d8b401" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="7" r="4"></circle>
+                    <path d="M5 21c0-4 3-7 7-7s7 3 7 7"></path>
+                </svg>
+                <div>
+                    <div id="username" style="font-weight:700;">User</div>
+                    <div class="muted">Dumps</div>
+                </div>
+            </div>
+            <div class="meta">
+                <div>
+                    <div class="label">Bitcoin</div>
+                    <div class="badge" id="btc-price"><span class="btc-icon">฿</span> $--.--</div>
+                </div>
+                <div>
+                    <div class="label">Balance</div>
+                    <div class="badge" id="balance">$0.00</div>
+                </div>
+            </div>
+            <a class="topup-btn" href="topup.html">Top up</a>
+        </div>
+    </nav>
+
+    <div class="content">
+        <div class="card">
+            <h2>Dumps</h2>
+            <div class="muted">All vendors products are verified.</div>
+            <div class="filters">
+                <label>
+                    Region
+                    <select id="filter-region">
+                        <option value="all">All</option>
+                        <option value="USA">USA</option>
+                        <option value="EU">EU</option>
+                        <option value="APAC">APAC</option>
+                        <option value="Canada">Canada</option>
+                        <option value="LATAM">LATAM</option>
+                        <option value="Mixed">Mixed</option>
+                    </select>
+                </label>
+                <label>
+                    Freshness
+                    <select id="filter-freshness">
+                        <option value="all">All</option>
+                        <option value="Fresh+">Fresh+</option>
+                        <option value="Fresh">Fresh</option>
+                        <option value="Standard">Standard</option>
+                        <option value="Old stock">Old stock</option>
+                        <option value="Archive">Archive</option>
+                    </select>
+                </label>
+                <label>
+                    Quality
+                    <select id="filter-quality">
+                        <option value="all">All</option>
+                        <option value="High Validity">High Validity</option>
+                        <option value="QC Passed">QC Passed</option>
+                        <option value="Fresh">Fresh</option>
+                        <option value="Low decline">Low decline</option>
+                        <option value="Chip ready">Chip ready</option>
+                        <option value="POS friendly">POS friendly</option>
+                    </select>
+                </label>
+                <label>
+                    Price
+                    <select id="filter-price">
+                        <option value="all">All</option>
+                        <option value="under200">Under $200</option>
+                        <option value="200to400">$200 - $400</option>
+                        <option value="400plus">$400+</option>
+                    </select>
+                </label>
+            </div>
+            <div id="dump-list" class="list"></div>
+            <div id="pagination" class="pagination"></div>
+        </div>
+    </div>
+    <div class="popup" id="balance-popup">
+        <div class="popup-card">
+            <h3>Balance too low</h3>
+            <div class="muted">Your balance is not enough for this purchase. Please top up to continue.</div>
+            <div class="popup-actions">
+                <button class="buy-btn" type="button" id="popup-topup">Top up</button>
+                <button class="buy-btn" type="button" id="popup-close">OK</button>
+            </div>
+        </div>
+    </div>
+    <div class="popup" id="activation-popup">
+        <div class="popup-card">
+            <h3>Account activation required</h3>
+            <div class="muted">Minimum account activation is $100. This helps reduce fraud, failed payments, and keeps the marketplace stable.</div>
+            <div class="popup-actions">
+                <button class="buy-btn" type="button" id="activation-topup">Top up</button>
+                <button class="buy-btn" type="button" id="activation-close">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const storedUser = localStorage.getItem('rar_username') || 'User';
+        document.getElementById('username').textContent = storedUser;
+        const storedBalance = localStorage.getItem('rar_balance') || '0.00';
+        document.getElementById('balance').textContent = `$${storedBalance}`;
+        function getBalanceAmount() {
+            const raw = localStorage.getItem('rar_balance') || '0';
+            return parseFloat(String(raw).replace(/[^0-9.]/g, '')) || 0;
+        }
+        function showBalancePopup(open) {
+            const popup = document.getElementById('balance-popup');
+            if (!popup) return;
+            popup.classList.toggle('open', !!open);
+        }
+        function showActivationPopup(open) {
+            const popup = document.getElementById('activation-popup');
+            if (!popup) return;
+            popup.classList.toggle('open', !!open);
+        }
+        function fetchBtc() {
+            const target = document.getElementById('btc-price');
+            const update = rate => {
+                if (rate) {
+                    target.innerHTML = `<span class="btc-icon">฿</span> $${rate.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
+                    return true;
+                }
+                return false;
+            };
+            fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd')
+                .then(res => res.json())
+                .then(data => {
+                    if (update(data?.bitcoin?.usd)) return;
+                    throw new Error('no rate');
+                })
+                .catch(() => {
+                    fetch('https://api.coindesk.com/v1/bpi/currentprice/USD.json')
+                        .then(res => res.json())
+                        .then(data => {
+                            if (update(data?.bpi?.USD?.rate_float)) return;
+                            target.textContent = 'Unavailable';
+                        })
+                        .catch(() => { target.textContent = 'Unavailable'; });
+                });
+        }
+        fetchBtc();
+        setInterval(fetchBtc, 60000);
+
+        // Demo inventory generator to simulate "many pages" of dumps
+        const categories = ['Track 1', 'Track 2', 'Track 1/2'];
+        const regionsWeighted = ['USA', 'USA', 'USA', 'USA', 'USA', 'EU', 'APAC', 'Canada', 'LATAM', 'Mixed'];
+        const qualities = ['High Validity', 'QC Passed', 'Fresh', 'Low decline', 'Chip ready', 'POS friendly'];
+        const qualityFactor = {
+            'High Validity': 1.3,
+            'QC Passed': 1.15,
+            'Fresh': 1.25,
+            'Low decline': 1.1,
+            'Chip ready': 1.2,
+            'POS friendly': 1.05
+        };
+
+        function pickRegion() {
+            return regionsWeighted[Math.floor(Math.random() * regionsWeighted.length)];
+        }
+        function pick(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        function randomDateSince2024() {
+            const start = new Date('2024-01-01').getTime();
+            const end = Date.now();
+            const skew = Math.pow(Math.random(), 0.3); // heavier bias toward recent dates
+            const ts = start + skew * (end - start);
+            return new Date(ts);
+        }
+
+        function freshnessTag(daysAgo) {
+            if (daysAgo <= 3) return 'Fresh+';
+            if (daysAgo <= 18) return 'Fresh';
+            if (daysAgo <= 60) return 'Standard';
+            if (daysAgo <= 180) return 'Old stock';
+            return 'Archive';
+        }
+
+        function buildInventory(count = 80) {
+            return Array.from({ length: count }, (_, i) => {
+                const tier = pick(categories);
+                const region = pickRegion(); // mostly USA due to weighting
+                const quality = pick(qualities);
+                // Heavier skew toward smaller batches; big batches (up to 5000) are rare
+                const amount = Math.max(20, Math.round(Math.pow(Math.random(), 2.2) * 5000));
+                // Date spread: anywhere from start of 2024 to today
+                const updatedAt = randomDateSince2024();
+                const now = new Date();
+                const daysAgo = Math.floor((now - updatedAt) / (1000 * 60 * 60 * 24));
+                const updatedStr = updatedAt.toISOString().slice(0, 10);
+                const freshnessLabel = freshnessTag(daysAgo);
+                // Price factors: tiered quantity discounts, freshness/quality premiums, slight USA premium
+                let qtyFactor = 1;
+                if (amount > 1000) {
+                    qtyFactor = 0.35 + Math.random() * 0.2; // 0.35–0.55
+                } else if (amount > 100) {
+                    qtyFactor = 0.5 + Math.random() * 0.2; // 0.5–0.7
+                } else {
+                    qtyFactor = 0.85 + Math.random() * 0.15; // keep small lots pricier
+                }
+                const regionFactor = region === 'USA' ? 1.05 : 0.97;
+                const basePerUnit = 1.5 * qtyFactor;
+                const perUnit = Math.max(0.32, Math.min(1.4, basePerUnit)); // clamp
+                const freshnessFactor = daysAgo <= 2 ? 1.16 : daysAgo <= 14 ? 1.08 : daysAgo <= 60 ? 0.9 : daysAgo <= 180 ? 0.82 : 0.75;
+                const price = Math.max(
+                    95,
+                    Math.round(amount * perUnit * (qualityFactor[quality] || 1) * freshnessFactor * regionFactor)
+                );
+                return {
+                    title: `${tier} · ${region}`,
+                    subtitle: `${quality} · BIN mix · ${amount} dumps · Captured: ${updatedStr} · ${freshnessLabel}`,
+                    price: `$${price}`,
+                    priceValue: price,
+                    amount,
+                    updatedAt,
+                    freshnessLabel
+                };
+            });
+        }
+
+        const perPage = 12;
+        const totalPages = 147;
+        const STORAGE_KEY = 'rar_dumps_inventory';
+        const STORAGE_DATE_KEY = 'rar_dumps_inventory_date';
+        const todayStamp = () => new Date().toISOString().slice(0, 10);
+
+        function loadInventory() {
+            try {
+                const savedDate = localStorage.getItem(STORAGE_DATE_KEY);
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (savedDate === todayStamp() && saved) {
+                    const parsed = JSON.parse(saved);
+                    if (Array.isArray(parsed)) return parsed;
+                }
+            } catch (e) { /* ignore */ }
+            return null;
+        }
+
+        function saveInventory(data) {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+                localStorage.setItem(STORAGE_DATE_KEY, todayStamp());
+            } catch (e) { /* ignore */ }
+        }
+
+        let fakeDumps = loadInventory();
+        if (!fakeDumps) {
+            fakeDumps = buildInventory(perPage * totalPages);
+            saveInventory(fakeDumps);
+        }
+
+        let currentPage = 1;
+        const filters = { region: 'all', freshness: 'all', quality: 'all', price: 'all' };
+
+        function getFilteredDumps() {
+            return fakeDumps.filter(item => {
+                const regionOk = filters.region === 'all' || item.title.includes(filters.region);
+                const freshOk = filters.freshness === 'all' || item.freshnessLabel === filters.freshness;
+                const qualityOk = filters.quality === 'all' || item.subtitle.includes(filters.quality);
+                let priceOk = true;
+                const p = item.priceValue || parseFloat(String(item.price).replace(/[^0-9.]/g, ''));
+                if (filters.price === 'under200') priceOk = p < 200;
+                else if (filters.price === '200to400') priceOk = p >= 200 && p <= 400;
+                else if (filters.price === '400plus') priceOk = p > 400;
+                return regionOk && freshOk && qualityOk && priceOk;
+            });
+        }
+
+        function renderPage(page) {
+            const filtered = getFilteredDumps();
+            const totalPagesFiltered = Math.max(1, Math.ceil(filtered.length / perPage));
+            currentPage = Math.min(page, totalPagesFiltered);
+            const list = document.getElementById('dump-list');
+            list.innerHTML = '';
+            const start = (currentPage - 1) * perPage;
+            const pageItems = filtered.slice(start, start + perPage);
+            if (!pageItems.length) {
+                const empty = document.createElement('div');
+                empty.className = 'muted';
+                empty.textContent = 'No dumps match these filters.';
+                list.appendChild(empty);
+            }
+            pageItems.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'entry';
+                div.innerHTML = `
+                    <div><strong>${item.title}</strong><div class="muted">${item.subtitle}</div></div>
+                    <div class="entry-actions">
+                        <div class="badge">${item.price}</div>
+                        <button class="buy-btn" type="button">Purchase</button>
+                    </div>
+                `;
+                list.appendChild(div);
+            });
+            renderPagination(totalPagesFiltered);
+        }
+
+        function renderPagination(total) {
+            const container = document.getElementById('pagination');
+            container.innerHTML = '';
+            const windowSize = 10;
+            const addBtn = (label, page, disabled = false, isActive = false) => {
+                const btn = document.createElement('button');
+                btn.className = `page-btn ${isActive ? 'active' : ''} ${disabled ? 'disabled' : ''}`;
+                btn.textContent = label;
+                if (!disabled) btn.addEventListener('click', () => renderPage(page));
+                container.appendChild(btn);
+            };
+            const addDots = () => {
+                const span = document.createElement('span');
+                span.className = 'dots';
+                span.textContent = '...';
+                container.appendChild(span);
+            };
+
+            const prevPage = Math.max(1, currentPage - 1);
+            const nextPage = Math.min(total, currentPage + 1);
+
+            addBtn('Prev', prevPage, currentPage === 1);
+
+            let start = Math.max(1, currentPage - Math.floor(windowSize / 2));
+            let end = start + windowSize - 1;
+            if (end > total) {
+                end = total;
+                start = Math.max(1, end - windowSize + 1);
+            }
+
+            if (start > 1) {
+                addBtn('1', 1, false, currentPage === 1);
+                if (start > 2) addDots();
+            }
+
+            for (let i = start; i <= end; i++) {
+                addBtn(String(i), i, false, i === currentPage);
+            }
+
+            if (end < total) {
+                if (end < total - 1) addDots();
+                addBtn(String(total), total, false, currentPage === total);
+            }
+
+            addBtn('Next', nextPage, currentPage === total);
+        }
+
+        document.getElementById('filter-region').addEventListener('change', e => { filters.region = e.target.value; renderPage(1); });
+        document.getElementById('filter-freshness').addEventListener('change', e => { filters.freshness = e.target.value; renderPage(1); });
+        document.getElementById('filter-quality').addEventListener('change', e => { filters.quality = e.target.value; renderPage(1); });
+        document.getElementById('filter-price').addEventListener('change', e => { filters.price = e.target.value; renderPage(1); });
+        document.addEventListener('click', (event) => {
+            const btn = event.target.closest('.buy-btn');
+            if (!btn) return;
+            const entry = btn.closest('.entry');
+            if (!entry) return;
+            const priceBadge = entry.querySelector('.entry-actions .badge');
+            const priceVal = priceBadge ? parseFloat(priceBadge.textContent.replace(/[^0-9.]/g, '')) : 0;
+            const balanceVal = getBalanceAmount();
+            if (balanceVal < priceVal) {
+                event.preventDefault();
+                showBalancePopup(true);
+                return;
+            }
+            if (balanceVal < 100) {
+                event.preventDefault();
+                showActivationPopup(true);
+            }
+        });
+        const popupClose = document.getElementById('popup-close');
+        if (popupClose) popupClose.addEventListener('click', () => showBalancePopup(false));
+        const popupTopup = document.getElementById('popup-topup');
+        if (popupTopup) popupTopup.addEventListener('click', () => {
+            window.location.href = 'topup.html';
+        });
+        const activationClose = document.getElementById('activation-close');
+        if (activationClose) activationClose.addEventListener('click', () => showActivationPopup(false));
+        const activationTopup = document.getElementById('activation-topup');
+        if (activationTopup) activationTopup.addEventListener('click', () => {
+            window.location.href = 'topup.html';
+        });
+
+        renderPage(1);
+
+        // Mobile navbar toggle
+        (function () {
+            const toggle = document.querySelector('.nav-toggle');
+            const links = document.querySelector('.nav-links');
+            if (!toggle || !links) return;
+            toggle.addEventListener('click', () => {
+                const open = links.classList.toggle('open');
+                toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            });
+            links.querySelectorAll('a').forEach(a => {
+                a.addEventListener('click', () => {
+                    links.classList.remove('open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                });
+            });
+        })();
+    </script>
+    <footer class="footer">realandrare.bid</footer>
+</body>
+</html>
+

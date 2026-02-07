@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RealAndRare - Shop</title>
+    <link rel="canonical" href="https://realandrare.bid/shop.html">
+    <meta name="robots" content="index, follow">
+    <link rel="preload" as="image" href="img/rare.webp">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Organization",
+                "name": "RealAndRare",
+                "url": "https://realandrare.bid/",
+                "logo": "https://realandrare.bid/resources/logo/gold.png"
+            },
+            {
+                "@type": "WebSite",
+                "name": "RealAndRare",
+                "url": "https://realandrare.bid/"
+            }
+        ]
+    }
+    </script>
+    <link rel="stylesheet" href="resources/css/app.min.css">
+    <style>
+        body {
+            background: linear-gradient(120deg, rgba(0,0,0,0.55), rgba(0,0,0,0.25)), url("img/rare.webp") center/cover fixed;
+            color: #f1f1f1;
+            font-family: 'Nunito', sans-serif;
+        }
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 24px;
+            background: radial-gradient(circle at 10% 20%, rgba(216,180,1,0.12), rgba(0,0,0,0.7)),
+                        radial-gradient(circle at 90% 10%, rgba(255,255,255,0.08), rgba(0,0,0,0.8));
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            position: relative;
+            z-index: 1200;
+            overflow: visible;
+        }
+        .nav-toggle {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.06);
+            color: #f1f1f1;
+            cursor: pointer;
+        }
+        .nav-toggle:hover { border-color: rgba(216,180,1,0.35); }
+        .nav-toggle svg { width: 22px; height: 22px; }
+        .nav-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-right: 18px;
+            color: #f1f1f1;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .nav-links a:last-child { margin-right: 0; }
+        .nav-links a:hover { color: #d8b401; }
+        .nav-links svg { width: 16px; height: 16px; }
+        .right { display: flex; align-items: center; gap: 18px; }
+        .profile { display: flex; align-items: center; gap: 12px; }
+        .profile svg {
+            width: 40px; height: 40px; padding: 8px;
+            border-radius: 50%; background: rgba(255, 255, 255, 0.08);
+        }
+        .meta { display: grid; grid-template-columns: repeat(2, minmax(110px, auto)); gap: 8px 16px; align-items: center; }
+        .badge {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 8px 12px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #f1f1f1;
+        }
+        .topup-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 12px;
+            border-radius: 10px;
+            background: #d8b401;
+            color: #000;
+            font-weight: 800;
+            text-decoration: none;
+            border: 1px solid rgba(0,0,0,0.2);
+            white-space: nowrap;
+        }
+        .topup-btn:hover { background: #f1d23a; }
+        .btc-icon { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; background: #f7931a; color: #000; font-weight: 800; font-size: 11px; }
+        .label { opacity: 0.75; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; }
+        .muted { opacity: 0.8; font-size: 13px; }
+        .content {
+            padding: 28px;
+            display: grid;
+            gap: 16px;
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        .card {
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 22px 24px;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+        .card h2 { margin: 0 0 6px 0; }
+        .grid {
+            display: grid;
+            gap: 14px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        }
+        .item {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 10px;
+            padding: 12px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .item strong { font-size: 15px; }
+        .tag {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 8px;
+            background: rgba(216,180,1,0.18);
+            color: #f7e27a;
+            font-weight: 700;
+            font-size: 12px;
+            width: fit-content;
+        }
+        .card-icon { display: flex; align-items: center; gap: 10px; }
+        .card-icon svg { width: 40px; height: 28px; border-radius: 6px; }
+        .price-row { display: flex; align-items: center; gap: 10px; margin-top: 4px; }
+        .price-tag { background: rgba(255,255,255,0.08); padding: 6px 10px; border-radius: 8px; font-weight: 700; border: 1px solid rgba(255,255,255,0.12); color: #f7e27a; }
+        .price-text { color: #f7e27a; font-weight: 700; }
+        .buy-btn { padding: 8px 12px; border-radius: 8px; background: #d8b401; color: #000; font-weight: 700; border: none; cursor: pointer; }
+        .buy-btn:hover { background: #f1d23a; }
+        .extras { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+        .extra-icon {
+            width: 22px;
+            height: 22px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.05);
+            color: #59d9b4;
+            position: relative;
+        }
+        .extra-icon svg { width: 16px; height: 16px; display: block; }
+        .extra-icon::after {
+            content: attr(data-label);
+            position: absolute;
+            left: 50%;
+            bottom: calc(100% + 6px);
+            transform: translateX(-50%);
+            padding: 3px 6px;
+            border-radius: 6px;
+            background: rgba(0,0,0,0.9);
+            color: #f1f1f1;
+            font-size: 11px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.15s ease, transform 0.15s ease;
+        }
+        .extra-icon:hover::after {
+            opacity: 1;
+            transform: translate(-50%, -2px);
+        }
+        .table-wrap { overflow-x: auto; }
+        table.card-table { width: 100%; min-width: 900px; border-collapse: collapse; margin-top: 14px; }
+        table.card-table th, table.card-table td { padding: 10px 8px; text-align: left; }
+        table.card-table th { font-size: 13px; opacity: 0.8; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        table.card-table tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+        table.card-table tr:hover { background: rgba(216,180,1,0.06); }
+        .card-type { display: inline-flex; align-items: center; gap: 8px; }
+        .card-type svg { width: 28px; height: 18px; border-radius: 4px; }
+        .card-type svg.virtual-icon { width: 24px; height: 16px; border-radius: 4px; }
+        .muted-small { opacity: 0.65; font-size: 12px; }
+        .pagination { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+        .page-btn { padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: #f1f1f1; cursor: pointer; }
+        .page-btn.active { background: rgba(216,180,1,0.16); border-color: rgba(216,180,1,0.4); color: #fce77c; }
+        .page-btn:hover { border-color: rgba(216,180,1,0.35); }
+        .page-btn.disabled { opacity: 0.45; cursor: not-allowed; }
+        .dots { opacity: 0.6; padding: 8px 0; }
+        .filters { display: flex; gap: 10px; flex-wrap: wrap; margin: 14px 0 6px; }
+        .filters label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; opacity: 0.8; }
+        .filters select, .filters input { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #f1f1f1; padding: 8px 10px; border-radius: 8px; min-width: 140px; }
+        .footer { text-align: center; padding: 18px 12px 26px; color: rgba(241,241,241,0.7); font-size: 12px; letter-spacing: 0.6px; }
+        .popup {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.65);
+            z-index: 2000;
+            padding: 20px;
+        }
+        .popup.open { display: flex; }
+        .popup-card {
+            background: #111;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 12px;
+            padding: 16px 18px;
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.45);
+        }
+        .popup-card h3 { margin: 0 0 8px 0; }
+        .popup-actions { display: flex; gap: 10px; justify-content: center; margin-top: 12px; flex-wrap: wrap; }
+        @media (max-width: 768px) {
+            /* Keep the top row on one line, but let the hamburger menu take a full second row when opened */
+            .navbar { position: relative; display: flex !important; align-items: center; justify-content: space-between; gap: 10px; padding: 0 12px; min-height: 56px; height: auto; flex-wrap: wrap !important; }
+            .navbar .nav-toggle { display: inline-flex; flex: 0 0 auto; width: 36px; height: 36px; border-radius: 10px; }
+
+            .navbar .right { display: flex; align-items: center; justify-content: flex-end; gap: 10px; flex-wrap: nowrap !important; min-width: 0; flex: 1 1 auto; }
+
+            /* app.min.css sets `.profile { margin-top: 75px }` on mobile; override for navbar */
+            .navbar .profile { margin-top: 0 !important; text-align: left !important; min-width: 0; gap: 8px; height: 36px; padding: 6px 10px; border-radius: 12px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); align-items: center; flex: 0 1 auto; align-self: center; }
+            .navbar .profile svg { width: 18px; height: 18px; padding: 0; display: block; background: transparent !important; }
+            .navbar .profile > div { display: flex; align-items: center; }
+            .navbar .profile .muted { display: none; }
+            .navbar #username { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 90px; line-height: 1; }
+
+            .navbar .meta { display: flex; align-items: center; gap: 8px; flex-wrap: nowrap; }
+            .navbar .meta > div { display: flex; flex-direction: column; }
+            .navbar .meta .label { display: none; }
+            .navbar .badge { padding: 6px 10px; font-size: 12px; white-space: nowrap; line-height: 1; height: 36px; border-radius: 12px; }
+            .navbar .btc-icon { width: 16px; height: 16px; font-size: 10px; }
+            .navbar .topup-btn { padding: 6px 10px; font-size: 12px; height: 36px; border-radius: 12px; }
+
+            .navbar .nav-toggle { order: 1; }
+            .navbar .right { order: 2; }
+
+            /* Menu opens under the top row (in-flow), pushing content down */
+            .navbar .nav-links { display: none; width: 100%; order: 3; position: static; flex-direction: column; gap: 8px; padding: 10px; margin: 0 0 10px 0; border-radius: 12px; background: rgba(0, 0, 0, 0.55); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+            .navbar .nav-links.open { display: flex; }
+            .navbar .nav-links a { margin-right: 0; padding: 10px 10px; border-radius: 10px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); }
+            .content { padding: 10px 12px 14px; }
+        }
+        /* Stack table rows on small screens so no horizontal scroll */
+        @media (max-width: 768px) {
+            #username { max-width: 60px; }
+            .navbar { gap: 8px; padding: 0 10px; min-height: 52px; height: auto; }
+            .navbar .right { gap: 8px; }
+            .navbar .badge { padding: 5px 8px; font-size: 11px; height: 34px; border-radius: 12px; }
+            .navbar .profile { padding: 5px 8px; height: 34px; }
+            .navbar .topup-btn { padding: 5px 8px; font-size: 11px; height: 34px; }
+            .table-wrap { overflow: visible; }
+            table.card-table { min-width: 0; width: 100%; }
+            table.card-table thead { display: none; }
+            table.card-table, table.card-table tbody, table.card-table tr, table.card-table td { display: block; width: 100%; }
+            table.card-table tr { margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 6px 8px; background: rgba(255,255,255,0.03); }
+            table.card-table td { padding: 6px 4px; border: none; display: flex; justify-content: space-between; gap: 10px; }
+            table.card-table td::before { content: attr(data-label); opacity: 0.65; font-size: 12px; }
+        }
+
+        /* Remove horizontal scroll on tablets too */
+        @media (max-width: 1024px) {
+            .table-wrap { overflow: visible; }
+            table.card-table { min-width: 0; width: 100%; }
+            table.card-table thead { display: none; }
+            table.card-table, table.card-table tbody, table.card-table tr, table.card-table td { display: block; width: 100%; }
+            table.card-table tr { margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 6px 8px; background: rgba(255,255,255,0.03); }
+            table.card-table td { padding: 6px 4px; border: none; display: flex; justify-content: space-between; gap: 10px; }
+            table.card-table td::before { content: attr(data-label); opacity: 0.65; font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 6h16"></path>
+                <path d="M4 12h16"></path>
+                <path d="M4 18h16"></path>
+            </svg>
+        </button>
+        <div class="nav-links">
+            <a href="shop.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 7h12l-1 12H7L6 7z"></path><path d="M9 7V5a3 3 0 0 1 6 0v2"></path>
+                </svg>
+                Shop
+            </a>
+            <a href="dumps.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <ellipse cx="12" cy="5" rx="7" ry="3"></ellipse><path d="M5 5v6c0 1.6 3.1 3 7 3s7-1.4 7-3V5"></path><path d="M5 11v6c0 1.6 3.1 3 7 3s7-1.4 7-3v-6"></path>
+                </svg>
+                Dumps
+            </a>
+            <a href="checkers.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="m9 12 2 2 4-4"></path>
+                </svg>
+                Checkers
+            </a>
+            <a href="orders.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M7 5h10"></path><path d="M7 9h10"></path><path d="M7 13h6"></path><rect x="5" y="3" width="14" height="18" rx="2"></rect>
+                </svg>
+                Orders
+            </a>
+            <a href="support.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 9a7 7 0 0 1 14 0v6a4 4 0 0 1-4 4h-1"></path><path d="M5 13v2a4 4 0 0 0 4 4h1"></path><path d="M8 21h3"></path><path d="M18 13h2"></path><path d="M4 13H2"></path>
+                </svg>
+                Support
+            </a>
+            <a href="dashboard.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect>
+                </svg>
+                Dashboard
+            </a>
+        </div>
+        <div class="right">
+            <div class="profile">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#d8b401" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="7" r="4"></circle>
+                    <path d="M5 21c0-4 3-7 7-7s7 3 7 7"></path>
+                </svg>
+                <div>
+                    <div id="username" style="font-weight:700;">User</div>
+                    <div class="muted">Shop</div>
+                </div>
+            </div>
+            <div class="meta">
+                <div>
+                    <div class="label">Bitcoin</div>
+                    <div class="badge" id="btc-price"><span class="btc-icon">฿</span> $--.--</div>
+                </div>
+                <div>
+                    <div class="label">Balance</div>
+                    <div class="badge" id="balance">$0.00</div>
+                </div>
+            </div>
+            <a class="topup-btn" href="topup.html">Top up</a>
+        </div>
+    </nav>
+
+    <div class="content">
+        <div class="card">
+            <h2>CC Shop</h2>
+            <div class="muted">All vendors products are verified.</div>
+            <div class="filters">
+                <label>
+                    Brand
+                    <select id="filter-brand">
+                        <option value="all">All</option>
+                        <option value="visa">Visa</option>
+                        <option value="mc">Mastercard</option>
+                        <option value="amex">Amex</option>
+                        <option value="unionpay">UnionPay</option>
+                        <option value="disc">Discover</option>
+                    </select>
+                </label>
+                <label>
+                    Country
+                    <select id="filter-country">
+                        <option value="all">All</option>
+                        <option value="USA">USA</option>
+                        <option value="Canada">Canada</option>
+                        <option value="Mexico">Mexico</option>
+                        <option value="Brazil">Brazil</option>
+                        <option value="Argentina">Argentina</option>
+                        <option value="Colombia">Colombia</option>
+                        <option value="Chile">Chile</option>
+                        <option value="UK">UK</option>
+                        <option value="Germany">Germany</option>
+                        <option value="France">France</option>
+                        <option value="Italy">Italy</option>
+                        <option value="Spain">Spain</option>
+                        <option value="Netherlands">Netherlands</option>
+                        <option value="Belgium">Belgium</option>
+                        <option value="Sweden">Sweden</option>
+                        <option value="Norway">Norway</option>
+                        <option value="Denmark">Denmark</option>
+                        <option value="Finland">Finland</option>
+                        <option value="Poland">Poland</option>
+                        <option value="Czechia">Czechia</option>
+                        <option value="Austria">Austria</option>
+                        <option value="Portugal">Portugal</option>
+                        <option value="Greece">Greece</option>
+                        <option value="Ireland">Ireland</option>
+                        <option value="Russia">Russia</option>
+                        <option value="Turkey">Turkey</option>
+                        <option value="Saudi Arabia">Saudi Arabia</option>
+                        <option value="UAE">UAE</option>
+                        <option value="Israel">Israel</option>
+                        <option value="Egypt">Egypt</option>
+                        <option value="Nigeria">Nigeria</option>
+                        <option value="Kenya">Kenya</option>
+                        <option value="South Africa">South Africa</option>
+                        <option value="China">China</option>
+                        <option value="India">India</option>
+                        <option value="Japan">Japan</option>
+                        <option value="South Korea">South Korea</option>
+                        <option value="Indonesia">Indonesia</option>
+                        <option value="Malaysia">Malaysia</option>
+                        <option value="Thailand">Thailand</option>
+                        <option value="Philippines">Philippines</option>
+                        <option value="Vietnam">Vietnam</option>
+                        <option value="Pakistan">Pakistan</option>
+                        <option value="Singapore">Singapore</option>
+                        <option value="Australia">Australia</option>
+                        <option value="New Zealand">New Zealand</option>
+                        <option value="Latvia">Latvia</option>
+                    </select>
+                </label>
+                <label>
+                    BIN search
+                    <input id="filter-bin" type="text" placeholder="e.g. 4128" />
+                </label>
+                <label>
+                    Bank
+                    <input id="filter-bank" type="text" placeholder="Bank name" />
+                </label>
+                <label>
+                    Exp (MM/YY)
+                    <input id="filter-exp" type="text" placeholder="e.g. 09/28" />
+                </label>
+                <label>
+                    Price
+                    <select id="filter-price">
+                        <option value="all">All</option>
+                        <option value="under15">Under $15</option>
+                        <option value="15to18">$15 - $18</option>
+                        <option value="18plus">$18+</option>
+                    </select>
+                </label>
+                <label>
+                    Balance
+                    <select id="filter-balance">
+                        <option value="all">All</option>
+                        <option value="under400">Under $400</option>
+                        <option value="400to500">$400 - $500</option>
+                        <option value="500plus">$500+</option>
+                    </select>
+                </label>
+            </div>
+            <div class="table-wrap">
+                <table class="card-table" id="card-table">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Card Number</th>
+                            <th>Balance</th>
+                            <th>Price</th>
+                            <th>Bank</th>
+                            <th>Holder</th>
+                            <th>Email</th>
+                            <th>Expires</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div id="pagination" class="pagination"></div>
+        </div>
+    </div>
+    <div class="popup" id="balance-popup">
+        <div class="popup-card">
+            <h3>Balance too low</h3>
+            <div class="muted">Your balance is not enough for this purchase. Please top up to continue.</div>
+            <div class="popup-actions">
+                <button class="action buy-btn" type="button" id="popup-topup">Top up</button>
+                <button class="action buy-btn" type="button" id="popup-close">OK</button>
+            </div>
+        </div>
+    </div>
+    <div class="popup" id="activation-popup">
+        <div class="popup-card">
+            <h3>Account activation required</h3>
+            <div class="muted">Minimum account activation is $100. This helps reduce fraud, failed payments, and keeps the marketplace stable.</div>
+            <div class="popup-actions">
+                <button class="action buy-btn" type="button" id="activation-topup">Top up</button>
+                <button class="action buy-btn" type="button" id="activation-close">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const storedUser = localStorage.getItem('rar_username') || 'User';
+        document.getElementById('username').textContent = storedUser;
+        const storedBalance = localStorage.getItem('rar_balance') || '0.00';
+        document.getElementById('balance').textContent = `$${storedBalance}`;
+
+        function fetchBtc() {
+            const target = document.getElementById('btc-price');
+            const update = rate => {
+                if (rate) {
+                    target.innerHTML = `<span class="btc-icon">฿</span> $${rate.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
+                    return true;
+                }
+                return false;
+            };
+
+            fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd')
+                .then(res => res.json())
+                .then(data => {
+                    if (update(data?.bitcoin?.usd)) return;
+                    throw new Error('no rate');
+                })
+                .catch(() => {
+                    fetch('https://api.coindesk.com/v1/bpi/currentprice/USD.json')
+                        .then(res => res.json())
+                        .then(data => {
+                            if (update(data?.bpi?.USD?.rate_float)) return;
+                            target.textContent = 'Unavailable';
+                        })
+                        .catch(() => {
+                            target.textContent = 'Unavailable';
+                        });
+                });
+        }
+        fetchBtc();
+        setInterval(fetchBtc, 60000);
+
+        function maskSurname(fullName) {
+            const parts = fullName.split(' ');
+            if (parts.length < 2) return fullName;
+            return `${parts[0]} ${'****'}`;
+        }
+
+        function maskEmail(email, visiblePart) {
+            const [user, domain] = email.split('@');
+            if (!domain) return email;
+            const visible = (visiblePart || user.slice(0, 3) || 'usr').toLowerCase();
+            return `${visible}****@${domain}`;
+        }
+
+        function maskCard(number) {
+            const parts = number.split(' ');
+            if (parts.length <= 1) return number;
+            const digits = parts.join('');
+            const bin = digits.slice(0, 6);
+            if (!bin) return number;
+            return `${bin} **** **** ****`;
+        }
+
+        function getBalanceAmount() {
+            const raw = localStorage.getItem('rar_balance') || '0';
+            return parseFloat(String(raw).replace(/[^0-9.]/g, '')) || 0;
+        }
+
+        function showBalancePopup(open) {
+            const popup = document.getElementById('balance-popup');
+            if (!popup) return;
+            popup.classList.toggle('open', !!open);
+        }
+        function showActivationPopup(open) {
+            const popup = document.getElementById('activation-popup');
+            if (!popup) return;
+            popup.classList.toggle('open', !!open);
+        }
+
+        function brandIcon(name) {
+            switch (name) {
+                case 'visa':
+                    return `<svg viewBox="0 0 48 32" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="vbg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0a2985"/><stop offset="100%" stop-color="#0f5ad5"/></linearGradient></defs><rect width="48" height="32" rx="4" fill="url(#vbg)"/><text x="9" y="21" fill="#fff" font-family="Arial Black, Arial, sans-serif" font-size="11" font-weight="800">VISA</text></svg>`;
+                case 'mc':
+                    return `<svg viewBox="0 0 48 32" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="32" rx="4" fill="#0c1a2b"/><circle cx="20" cy="16" r="8" fill="#eb001b"/><circle cx="28" cy="16" r="8" fill="#f79e1b"/><text x="13" y="26" fill="#fff" font-family="Arial Black, Arial, sans-serif" font-size="6" font-weight="800">MASTERCARD</text></svg>`;
+                case 'amex':
+                    return `<svg viewBox="0 0 48 32" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="32" rx="4" fill="#2b9bf4"/><rect x="6" y="9" width="36" height="14" fill="#1f6fb8"/><text x="9" y="21" fill="#fff" font-family="Arial Black, Arial, sans-serif" font-size="10" font-weight="800">AMEX</text></svg>`;
+                case 'disc':
+                    return `<svg viewBox="0 0 48 32" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="32" rx="4" fill="#0f172a"/><circle cx="24" cy="16" r="9" fill="#ff8b2c"/><text x="12" y="23" fill="#fff" font-family="Arial Black, Arial, sans-serif" font-size="8" font-weight="800">DISC</text></svg>`;
+                case 'unionpay':
+                    return `<svg viewBox="0 0 48 32" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="32" rx="4" fill="#006fb5"/><rect x="8" y="6" width="32" height="20" rx="3" fill="#009e5d" opacity="0.9"/><text x="10" y="20" fill="#fff" font-family="Arial Black, Arial, sans-serif" font-size="8" font-weight="800">UNIONPAY</text></svg>`;
+                default:
+                    return `<svg viewBox="0 0 48 32" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="32" rx="4" fill="#6b21a8"/><path d="M10 12h28v8H10z" fill="#c084fc" opacity="0.6"/></svg>`;
+            }
+        }
+
+        const virtualBinPrefixes = [
+            '466661','466662','5536','5332','5116','4003','4833','5355','4565','5169',
+            '4893','4147','4430','5178','4599','5365','4030','4744','5352','4266',
+            '5119','4000','5201','3700','3787'
+        ];
+        const seededBins = {
+            visa: ['461046','444796','451502','419002','403562'],
+            mc: ['546923','529434','548030','515676'],
+            amex: ['379306','379284','372521']
+        };
+
+        function isVirtualBin(cardNumber) {
+            const digits = String(cardNumber || '').replace(/\s+/g, '');
+            return virtualBinPrefixes.some(prefix => digits.startsWith(prefix));
+        }
+
+        function virtualCardIcon() {
+            return `<svg class="virtual-icon" viewBox="0 0 48 32" xmlns="http://www.w3.org/2000/svg" aria-label="Virtual card" role="img"><rect width="48" height="32" rx="4" fill="#0f172a"/><rect x="5" y="8" width="38" height="16" rx="3" fill="#1f2937"/><path d="M10 18h10" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/><text x="25" y="22" fill="#f8fafc" font-family="Arial Black, Arial, sans-serif" font-size="8" font-weight="800">VIRTUAL</text></svg>`;
+        }
+
+        const extraIconSvgs = {
+            email: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v12H4z"></path><path d="m4 7 8 6 8-6"></path></svg>',
+            phone: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7l.6 3.1a2 2 0 0 1-.6 1.9l-1.2 1.2a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 1.9-.6l3.1.6a2 2 0 0 1 1.7 2z"></path></svg>',
+            pin: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6-5.5-6-10a6 6 0 0 1 12 0c0 4.5-6 10-6 10z"></path><circle cx="12" cy="11" r="2.5"></circle></svg>',
+            zip: '<svg viewBox="0 0 24 24" fill="none"><rect x="3.5" y="5.5" width="17" height="13" rx="3" stroke="currentColor" stroke-width="1.7"></rect><text x="12" y="15" text-anchor="middle" font-size="8" font-family="Arial, sans-serif" font-weight="700" fill="currentColor">ZIP</text></svg>',
+            user: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"></path></svg>',
+            safari: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 12l3.4-5.2"></path><path d="M12 12l-2.3 4.2"></path></svg>'
+        };
+        const extraIconLabels = { email: 'Email', phone: 'Phone', pin: 'Address', zip: 'ZIP', user: 'Holder Name', safari: 'User-Agent' };
+
+        function buildExtraIcons(rng) {
+            const icons = ['email', 'phone', 'pin', 'zip', 'user'];
+            const keepPin = rng() >= 0.28;
+            const keepZip = rng() >= 0.32;
+            const filtered = icons.filter(icon => {
+                if (icon === 'pin' && !keepPin) return false;
+                if (icon === 'zip' && !keepZip) return false;
+                return true;
+            });
+            if (keepPin && keepZip && rng() < 0.07) filtered.push('safari');
+            return filtered;
+        }
+
+        function renderExtraIcons(icons, isVirtual) {
+            const virtualBadge = isVirtual ? `<span class="extra-icon" data-label="Virtual card" aria-label="Virtual card" role="img">${virtualCardIcon()}</span>` : '';
+            return `
+                <div class="extras">
+                    ${icons.map(icon => `
+                        <span class="extra-icon" data-label="${extraIconLabels[icon]}" aria-label="${extraIconLabels[icon]}" role="img">
+                            ${extraIconSvgs[icon]}
+                        </span>
+                    `).join('')}
+                    ${virtualBadge}
+                </div>
+            `;
+        }
+
+        function mulberry32(a) {
+            return function() {
+                var t = a += 0x6D2B79F5;
+                t = Math.imul(t ^ t >>> 15, t | 1);
+                t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+                return ((t ^ t >>> 14) >>> 0) / 4294967296;
+            };
+        }
+
+        const brandWeights = [
+            { label: 'Visa', logo: 'visa', weight: 42 },
+            { label: 'Mastercard', logo: 'mc', weight: 32 },
+            { label: 'Amex', logo: 'amex', weight: 14 },
+            { label: 'UnionPay', logo: 'unionpay', weight: 7 },
+            { label: 'Discover', logo: 'disc', weight: 5 }
+        ];
+        const countryProfiles = [
+            { country: 'USA', weight: 70, banks: ['Bank of America','Chase','Wells Fargo','Citi','Capital One','PNC'], firstNames: ['James','Emily','Noah','Olivia','Liam','Emma','Mason','Ava','Ethan','Sophia','Isabella','Michael','Logan','Charlotte','Harper','Henry','Amelia','Alexander','Madison','Jacob','Evelyn'], lastNames: ['Smith','Johnson','Williams','Brown','Jones','Garcia','Miller','Davis','Wilson','Moore','Taylor','Anderson','Thomas','Jackson','White'] },
+            { country: 'Canada', weight: 12, banks: ['TD Bank','RBC Royal Bank','Scotiabank','BMO','CIBC'], firstNames: ['Liam','Olivia','Noah','Emma','William','Charlotte','Lucas','Amelia','Benjamin','Chloe','Jack','Ella','Ethan','Sophie'], lastNames: ['Martin','Bernard','Roy','Nguyen','Chen','Wilson','Campbell','Thompson','Smith','Wong','Singh'] },
+            { country: 'Mexico', weight: 8, banks: ['BBVA Bancomer','Banorte','Santander Mexico','Banamex'], firstNames: ['Santiago','Mateo','Sofía','Valentina','Emilia','Diego','Camila','Andres','Renata','Luis','Fernanda','Jorge','Ana','Lucero','Bruno','Daniela'], lastNames: ['Hernández','García','Martínez','López','González','Rodríguez','Ramírez','Torres','Flores'] },
+            { country: 'Brazil', weight: 8, banks: ['Itaú','Bradesco','Banco do Brasil','Caixa'], firstNames: ['Miguel','Arthur','Heitor','Alice','Sophia','Laura','Gabriel','Manuela','Bernardo','Isabella','Joao','Felipe','Bianca','Larissa'], lastNames: ['Silva','Santos','Oliveira','Souza','Pereira','Lima','Carvalho','Correia','Melo'] },
+            { country: 'Argentina', weight: 2, banks: ['Banco Galicia','Santander Río','BBVA Argentina'], firstNames: ['Mateo','Benjamín','Isabella','Mía','Santino','Valentina','Joaquín','Abril'], lastNames: ['González','Rodríguez','Fernández','López','Martínez'] },
+            { country: 'Colombia', weight: 3, banks: ['Bancolombia','Banco de Bogotá','Davivienda'], firstNames: ['Juan','Santiago','Valentina','María','Daniel','Sofía','Camilo','Sara'], lastNames: ['García','Martínez','Rodríguez','López','Hernández'] },
+            { country: 'UK', weight: 6, banks: ['HSBC','Barclays','NatWest','Lloyds','Santander UK'], firstNames: ['Oliver','George','Harry','Isla','Amelia','Ava','Jack','Sophia','Freddie','Grace','Alfie','Evie'], lastNames: ['Smith','Jones','Taylor','Brown','Williams','Davies','Evans','Wilson','Johnson'] },
+            { country: 'Germany', weight: 5, banks: ['Deutsche Bank','Commerzbank','DZ Bank'], firstNames: ['Leon','Ben','Noah','Emma','Mia','Hannah','Lukas','Laura','Finn','Marie'], lastNames: ['Müller','Schmidt','Schneider','Fischer','Weber','Wagner','Becker','Hoffmann'] },
+            { country: 'France', weight: 5, banks: ['Crédit Agricole','BNP Paribas','Société Générale'], firstNames: ['Lucas','Hugo','Jade','Louise','Emma','Léa','Gabriel','Chloé','Nathan','Zoé'], lastNames: ['Martin','Bernard','Dubois','Thomas','Robert','Petit','Durand','Moreau'] },
+            { country: 'Italy', weight: 5, banks: ['UniCredit','Intesa Sanpaolo','Banca Monte dei Paschi'], firstNames: ['Edoardo','Lorenzo','Matteo','Sofia','Giulia','Aurora','Alessandro','Martina','Gabriele','Chiara'], lastNames: ['Rossi','Russo','Ferrari','Esposito','Bianchi','Romano','Ricci','Marino'] },
+            { country: 'Spain', weight: 4, banks: ['Santander','BBVA','CaixaBank'], firstNames: ['Mateo','Lucas','Sofia','Martina','Lucia','Hugo','Daniel','Paula','Alejandro','Alba'], lastNames: ['García','Martínez','López','Sánchez','González','Pérez','Fernández','Díaz'] },
+            { country: 'Netherlands', weight: 2, banks: ['ING','Rabobank','ABN AMRO'], firstNames: ['Daan','Sem','Emma','Tess','Sophie','Mila','Lars','Julia'], lastNames: ['de Jong','Jansen','Bakker','de Vries','Visser'] },
+            { country: 'Belgium', weight: 1, banks: ['KBC','Belfius','BNP Paribas Fortis'], firstNames: ['Noah','Lucas','Liam','Emma','Olivia','Mila','Arthur','Louise'], lastNames: ['Peeters','Janssens','Maes','Dubois','Jacobs'] },
+            { country: 'Sweden', weight: 1.5, banks: ['Swedbank','SEB','Handelsbanken'], firstNames: ['William','Lucas','Elias','Alice','Maja','Elsa','Noah','Alma'], lastNames: ['Johansson','Andersson','Karlsson','Nilsson','Larsson'] },
+            { country: 'Norway', weight: 1, banks: ['DNB','SpareBank 1','Nordea Norway'], firstNames: ['Lucas','Oliver','Filip','Emma','Nora','Sofia','Jakob','Ingrid'], lastNames: ['Hansen','Johansen','Olsen','Larsen','Andersen'] },
+            { country: 'Denmark', weight: 0.8, banks: ['Danske Bank','Nordea Denmark','Jyske Bank'], firstNames: ['Oscar','William','Lucas','Ida','Ella','Freja','Noah','Sofia'], lastNames: ['Jensen','Nielsen','Hansen','Pedersen','Andersen'] },
+            { country: 'Finland', weight: 0.8, banks: ['OP Financial','Nordea Finland','Danske Bank'], firstNames: ['Eino','Leo','Oliver','Aino','Sofia','Aada','Veeti','Ella'], lastNames: ['Korhonen','Virtanen','Mäkinen','Nieminen','Hämäläinen'] },
+            { country: 'Poland', weight: 2, banks: ['PKO Bank Polski','mBank','Bank Pekao'], firstNames: ['Antoni','Jan','Jakub','Zuzanna','Julia','Maja','Filip','Alicja'], lastNames: ['Nowak','Kowalski','Lewandowski','Zieliński','Kamiński'] },
+            { country: 'Czechia', weight: 1, banks: ['Česká spořitelna','ČSOB','Komerční banka'], firstNames: ['Jakub','Jan','Tomáš','Eliška','Anna','Adéla','Matyáš','Tereza'], lastNames: ['Novák','Svoboda','Novotný','Dvořák','Černý'] },
+            { country: 'Austria', weight: 1, banks: ['Erste Bank','Raiffeisen','BAWAG'], firstNames: ['Paul','Jakob','Felix','Anna','Sophie','Mia','Jonas','Lena'], lastNames: ['Gruber','Huber','Bauer','Wagner','Müller'] },
+            { country: 'Portugal', weight: 1, banks: ['Caixa Geral','Millennium BCP','Novo Banco'], firstNames: ['Santiago','Afonso','Martim','Matilde','Leonor','Beatriz','Gabriel','Mariana'], lastNames: ['Silva','Santos','Ferreira','Pereira','Costa'] },
+            { country: 'Greece', weight: 1, banks: ['Piraeus Bank','Eurobank','Alpha Bank'], firstNames: ['Giorgos','Dimitris','Nikos','Maria','Eleni','Katerina','Kostas','Anna'], lastNames: ['Papadopoulos','Georgiou','Dimitriou','Nikolaou','Papanikolaou'] },
+            { country: 'Russia', weight: 2, banks: ['Sberbank','VTB','Alfa-Bank'], firstNames: ['Alexander','Artem','Maksim','Anna','Sofia','Maria','Dmitry','Polina','Vladislav','Arina'], lastNames: ['Ivanov','Smirnov','Kuznetsov','Popov','Volkov','Sokolov','Fedorov'] },
+            { country: 'Turkey', weight: 3, banks: ['Ziraat Bankası','Garanti BBVA','İşbank'], firstNames: ['Yusuf','Mehmet','Mustafa','Elif','Zeynep','Defne','Ahmet','Ecrin','Emir','Melisa'], lastNames: ['Yılmaz','Kaya','Demir','Şahin','Çelik','Acar','Polat'] },
+            { country: 'Saudi Arabia', weight: 1.5, banks: ['Al Rajhi Bank','NCB','Samba'], firstNames: ['Mohammed','Abdullah','Omar','Aisha','Fatimah','Noor','Khalid','Salma','Nasser','Hadeel'], lastNames: ['Al-Saud','Al-Faraj','Al-Harbi','Al-Qahtani','Al-Mutairi'] },
+            { country: 'UAE', weight: 1.5, banks: ['Emirates NBD','FAB','ADCB'], firstNames: ['Mohammed','Ahmed','Ali','Maryam','Aisha','Fatima','Hassan','Noora','Saeed','Latifa'], lastNames: ['Al-Mansoori','Al-Mazrouei','Al-Ketbi','Al-Dhaheri','Al-Farsi'] },
+            { country: 'Egypt', weight: 2, banks: ['National Bank of Egypt','Banque Misr','CIB'], firstNames: ['Omar','Ahmed','Youssef','Sara','Mariam','Aya','Kareem','Nour','Yasmin','Ola'], lastNames: ['Mohamed','Ahmed','Hassan','Ali','Ibrahim','Mahmoud'] },
+            { country: 'Nigeria', weight: 2.5, banks: ['GTBank','Access Bank','Zenith Bank'], firstNames: ['Emeka','Tunde','Chinedu','Ada','Chioma','Aisha','Chukwu','Ngozi'], lastNames: ['Okafor','Balogun','Olawale','Abiola','Adebayo'] },
+            { country: 'Kenya', weight: 1.5, banks: ['KCB','Equity Bank','Co-operative Bank'], firstNames: ['Brian','Ian','Kevin','Grace','Faith','Mercy','Collins','Winnie'], lastNames: ['Otieno','Mwangi','Kamau','Ochieng','Njoroge'] },
+            { country: 'South Africa', weight: 2, banks: ['Standard Bank','FNB','ABSA'], firstNames: ['Ethan','Liam','Jayden','Chloe','Leah','Mia','Daniel','Hannah'], lastNames: ['Nkosi','Naidoo','van der Merwe','Smith','Botha'] },
+            { country: 'China', weight: 18, banks: ['ICBC','Bank of China','CCB','Agricultural Bank'], firstNames: ['Wei','Li','Hao','Yun','Mei','Jia','Jun','Xiao','Qiang','Fang','Hui','Shan','Bo','Lei'], lastNames: ['Wang','Li','Zhang','Liu','Chen','Yang','Huang','Zhao','Wu','Zheng','Cai'] },
+            { country: 'India', weight: 14, banks: ['HDFC Bank','ICICI Bank','State Bank of India','Axis Bank'], firstNames: ['Aarav','Vivaan','Aditya','Diya','Ananya','Aanya','Rohan','Isha','Kabir','Priya','Rahul','Sneha','Kunal','Anjali'], lastNames: ['Patel','Sharma','Khan','Reddy','Singh','Gupta','Mehta','Iyer','Menon','Das','Bose'] },
+            { country: 'Japan', weight: 3, banks: ['Mitsubishi UFJ','Sumitomo Mitsui','Mizuho'], firstNames: ['Haruto','Sota','Yuto','Yui','Hina','Sakura','Ren','Riko','Taiga','Haruki','Aoi'], lastNames: ['Sato','Suzuki','Takahashi','Tanaka','Watanabe','Ito','Yamamoto','Nakamura'] },
+            { country: 'South Korea', weight: 3, banks: ['KB Kookmin','Shinhan','Woori'], firstNames: ['Seo-jun','Ha-joon','Do-yoon','Seo-yeon','Ha-eun','Ji-a','Min-jun','Soo-min','Ji-ho','Hyeon'], lastNames: ['Kim','Lee','Park','Choi','Jung','Kang','Yoon','Lim'] },
+            { country: 'Indonesia', weight: 5, banks: ['Bank Mandiri','BCA','BNI'], firstNames: ['Muhammad','Budi','Rizky','Siti','Ayu','Putri','Dewi','Agus'], lastNames: ['Saputra','Santoso','Wijaya','Siregar','Gunawan'] },
+            { country: 'Malaysia', weight: 2, banks: ['Maybank','CIMB','Public Bank'], firstNames: ['Muhammad','Ahmad','Adam','Aisyah','Nur','Siti','Hafiz','Farah'], lastNames: ['Abdullah','Ismail','Hassan','Rahman','Ahmad'] },
+            { country: 'Thailand', weight: 3, banks: ['Bangkok Bank','Kasikornbank','SCB'], firstNames: ['Nattapong','Krit','Phat','Napaporn','Sirilak','Pimchanok','Anan','Kanya'], lastNames: ['Suwan','Kittisak','Thongchai','Pattana','Saetang'] },
+            { country: 'Philippines', weight: 3, banks: ['BDO','BPI','Metrobank'], firstNames: ['Juan','Jose','Mark','Maria','Angel','Jasmine','Paolo','Bianca'], lastNames: ['Santos','Reyes','Cruz','Bautista','Garcia'] },
+            { country: 'Vietnam', weight: 3, banks: ['Vietcombank','VietinBank','BIDV'], firstNames: ['Minh','Anh','Khang','Linh','Trang','Ngoc','Huy','Mai'], lastNames: ['Nguyen','Tran','Le','Pham','Hoang'] },
+            { country: 'Pakistan', weight: 3, banks: ['HBL','UBL','MCB'], firstNames: ['Muhammad','Ahmed','Ali','Ayesha','Fatima','Zainab','Hassan','Noor'], lastNames: ['Khan','Malik','Hussain','Ahmed','Raza'] },
+            { country: 'Singapore', weight: 2, banks: ['DBS Bank','OCBC','UOB'], firstNames: ['Ethan','Jayden','Lucas','Chloe','Emma','Sophie','Caleb','Faith'], lastNames: ['Tan','Lim','Lee','Ng','Goh','Wong'] },
+            { country: 'Australia', weight: 4, banks: ['Commonwealth Bank','Westpac','ANZ','NAB'], firstNames: ['Oliver','Jack','William','Charlotte','Olivia','Isla','Hudson','Zoe'], lastNames: ['Smith','Jones','Williams','Brown','Wilson','Taylor'] },
+            { country: 'New Zealand', weight: 1, banks: ['ANZ NZ','ASB','BNZ'], firstNames: ['Oliver','Noah','Leo','Isla','Amelia','Charlotte','Lucas','Ava'], lastNames: ['Smith','Williams','Brown','Jones','Wilson','Taylor'] },
+            { country: 'Latvia', weight: 0.1, banks: ['Swedbank','SEB'], firstNames: ['Arturs','Markuss','Daniels','Emīlija','Sofija','Elza','Roberts'], lastNames: ['Ozoliņš','Kalniņš','Bērziņš','Liepa','Lapiņš'] }
+        ];
+        const domainsWeighted = [
+            { domain: 'gmail.com', weight: 40 },
+            { domain: 'outlook.com', weight: 20 },
+            { domain: 'yahoo.com', weight: 15 },
+            { domain: 'hotmail.com', weight: 10 },
+            { domain: 'icloud.com', weight: 8 },
+            { domain: 'libero.it', weight: 4 },
+            { domain: 'proton.me', weight: 1 }
+        ];
+
+        const extraFirstNames = {
+            'USA': ['Caleb','Aiden','Grace','Zoe','Nora','Eleanor','Lillian','Wyatt','Carter','Riley'],
+            'Canada': ['Mila','Logan','Aria','Ethan','Nolan','Luna','Hannah'],
+            'Mexico': ['Ximena','Regina','Gael','Emilio','Valeria','Natalia'],
+            'Brazil': ['Enzo','Pedro','Luiza','Helena','Sophia','Mariana','Rafael'],
+            'Argentina': ['Thiago','Tomas','Juana','Lola','Bruno','Luz'],
+            'Colombia': ['Valeria','Alejandra','Miguel','Andres','Lucia','Camila'],
+            'UK': ['Maisie','Lottie','Theo','Imogen','Archie','Ellie'],
+            'Germany': ['Mila','Lina','Emilia','Theo','Jonas','Noah'],
+            'France': ['Emma','Romy','Lina','Noé','Ethan','Maël','Enzo'],
+            'Italy': ['Francesca','Alessia','Valentina','Nicolo','Simone','Marco'],
+            'Spain': ['Mario','Pablo','Irene','Laia','Adrian','Nerea'],
+            'Netherlands': ['Bo','Lieke','Sven','Timo','Lars','Roos'],
+            'Belgium': ['Victor','Louis','Noor','Axel','Lina','Hugo'],
+            'Sweden': ['Vera','Stella','Lilly','Albin','Elias'],
+            'Norway': ['Aurora','Selma','Hedda','Sander','Emil'],
+            'Denmark': ['Alma','Karla','Liv','Mikkel','Victor'],
+            'Finland': ['Onni','Aleksi','Oskari','Helmi','Lotta'],
+            'Poland': ['Oliwia','Lena','Nikodem','Franciszek','Adam'],
+            'Czechia': ['Kristýna','Nela','Matěj','Adam','Filip'],
+            'Austria': ['Marlene','Sofia','Maximilian','David','Matthias'],
+            'Portugal': ['Eva','Clara','Rodrigo','Dinis','Gonçalo'],
+            'Greece': ['Panagiotis','Christos','Ioannis','Dimitra','Eleni'],
+            'Russia': ['Vladimir','Nikita','Arina','Yulia','Timur','Alina'],
+            'Turkey': ['Deniz','Mert','Can','Selin','Asya','Buse'],
+            'Saudi Arabia': ['Abdulrahman','Faisal','Mansour','Laila','Huda'],
+            'UAE': ['Saeed','Omar','Yousef','Latifa','Mariam','Reem'],
+            'Egypt': ['Karim','Mostafa','Hania','Dalia','Ola'],
+            'Nigeria': ['Ifeanyi','Obinna','Tosin','Amara','Chiamaka'],
+            'Kenya': ['Kevin','Brian','Faith','Lilian','Ivy','Purity'],
+            'South Africa': ['Sipho','Thabo','Lerato','Anele','Zanele','Naledi'],
+            'China': ['Ming','Chen','Tao','Lan','Hui','Fang','Qing','Rui'],
+            'India': ['Arjun','Krishna','Vikram','Kiran','Shreya','Riya','Pooja','Tanvi'],
+            'Japan': ['Kaito','Daiki','Haruka','Mio','Yuna','Rina','Sora'],
+            'South Korea': ['Ji-hoon','Sung-min','Hyun','Jin','Yuna','Min-ji'],
+            'Indonesia': ['Agung','Surya','Putra','Sari','Dewi','Indah'],
+            'Malaysia': ['Imran','Haziq','Danish','Balqis','Hannah','Adriana'],
+            'Thailand': ['Apisak','Chai','Korn','Kanya','Malee','Nicha'],
+            'Philippines': ['Christian','Jerome','John','Erika','Lara','Kristine'],
+            'Vietnam': ['Quang','Thanh','Bao','Phuong','Thao','Hang','Dung'],
+            'Pakistan': ['Bilal','Umar','Usman','Hira','Maryam','Aqsa'],
+            'Singapore': ['Gerald','Shawn','Bryan','Clara','Nicole','Gwen'],
+            'Australia': ['Cooper','Charlie','Harrison','Sienna','Willow','Mia'],
+            'New Zealand': ['Hunter','Archer','Jasper','Evie','Poppy','Paige'],
+            'Latvia': ['Kristaps','Rihards','Edgars','Inese','Liga','Zane']
+        };
+
+        const extraLastNames = {
+            'USA': ['Harris','Martin','Thompson','Martinez','Clark','Lewis'],
+            'Canada': ['Gagnon','Fortin','Bouchard','Lee','Lam','Chan'],
+            'Mexico': ['Flores','Vazquez','Torres','Sanchez','Cruz','Ramirez'],
+            'Brazil': ['Costa','Fernandes','Rodrigues','Almeida','Barbosa'],
+            'Argentina': ['Diaz','Romero','Alvarez','Torres','Dominguez'],
+            'Colombia': ['Castro','Gomez','Guerrero','Vargas','Moreno'],
+            'UK': ['Robinson','Walker','Young','Hall','Green','Clarke'],
+            'Germany': ['Klein','Schröder','Neumann','Zimmermann','Krüger'],
+            'France': ['Lefebvre','Fournier','Girard','Morel','Laurent'],
+            'Italy': ['Gallo','Costa','Conti','Mancini','De Luca'],
+            'Spain': ['Ruiz','Morales','Ortega','Navarro','Delgado'],
+            'Netherlands': ['van den Berg','Smit','de Boer','Vos','van Dijk'],
+            'Belgium': ['Lambert','Declerck','Dubois','Maes','Desmet'],
+            'Sweden': ['Berg','Lindberg','Lundberg','Nyström'],
+            'Norway': ['Berg','Andreassen','Nilsen','Lie'],
+            'Denmark': ['Christensen','Madsen','Kristensen'],
+            'Finland': ['Heikkinen','Järvinen','Laine'],
+            'Poland': ['Wójcik','Mazur','Krawczyk','Kaczmarek'],
+            'Czechia': ['Pospíšil','Kučera','Jelínek'],
+            'Austria': ['Moser','Mayer','Berger','Leitner'],
+            'Portugal': ['Rodrigues','Gonçalves','Martins','Sousa'],
+            'Greece': ['Papadakis','Vlachos','Pappas'],
+            'Russia': ['Sokolov','Mikhailov','Fedorov','Morozov'],
+            'Turkey': ['Öztürk','Aydın','Tekin','Arslan'],
+            'Saudi Arabia': ['Al-Mutairi','Al-Omari','Al-Shammari'],
+            'UAE': ['Al-Zaabi','Al-Nuaimi','Al-Ali'],
+            'Egypt': ['Mahmoud','Sayed','Khaled'],
+            'Nigeria': ['Eze','Okeke','Ibrahim','Adeyemi'],
+            'Kenya': ['Mutiso','Muriithi','Kariuki'],
+            'South Africa': ['Molefe','Dlamini','Nkuna'],
+            'China': ['Zhou','Xu','Sun','Ma','Zhu'],
+            'India': ['Kulkarni','Desai','Kapoor','Chowdhury'],
+            'Japan': ['Kobayashi','Kato','Yoshida','Yamada'],
+            'South Korea': ['Cho','Seo','Yoon','Han'],
+            'Indonesia': ['Pratama','Hidayat','Firmansyah'],
+            'Malaysia': ['Yusof','Mohd','Zainal','Salleh'],
+            'Thailand': ['Suksawat','Phan','Thong'],
+            'Philippines': ['Villanueva','Domingo','Reyes'],
+            'Vietnam': ['Vu','Do','Bui','Dang'],
+            'Pakistan': ['Butt','Qureshi','Bhatti'],
+            'Singapore': ['Lim','Tan','Yap','Low'],
+            'Australia': ['Anderson','Harris','Morgan','Lee'],
+            'New Zealand': ['Brown','Campbell','Patel'],
+            'Latvia': ['Berzins','Eglitis','Vilsons']
+        };
+
+        const globalFirstExtras = ['Alex','Jordan','Taylor','Casey','Riley','Skyler','Avery','Parker','Reese','Sawyer','Rowan','Quinn','Morgan','Dakota','Kai','Levi','Zara','Omar','Yara','Fatima','Mohammed','Anika','Mateo','Lina','Noor','Tariq','Sven','Klaus','Priya','Nina','Marta','Yuki','Mei','Sergei','Ivana','Marcos','Lucia'];
+        const globalLastExtras = ['Smith','Jones','Brown','Williams','Garcia','Rodriguez','Khan','Singh','Nguyen','Silva','Fernandez','Santos','Lee','Kim','Park','Patel','Lopez','Martinez','Hernandez','Ivanov','Petrov','Popescu','Costa','Rossi','Romero','Nakamura','Tanaka','Suzuki'];
+
+        const NAME_CACHE_KEY = 'rar_shop_name_cache';
+        const NAME_CACHE_DATE = 'rar_shop_name_cache_date';
+        let nameCache = { byCountry: {} };
+
+        function loadNameCache() {
+            try {
+                const savedDate = localStorage.getItem(NAME_CACHE_DATE);
+                const saved = localStorage.getItem(NAME_CACHE_KEY);
+                if (savedDate === todayStamp() && saved) {
+                    const parsed = JSON.parse(saved);
+                    if (parsed && typeof parsed === 'object') return parsed;
+                }
+            } catch (e) { /* ignore */ }
+            return { byCountry: {} };
+        }
+
+        function saveNameCache(cache) {
+            try {
+                localStorage.setItem(NAME_CACHE_KEY, JSON.stringify(cache));
+                localStorage.setItem(NAME_CACHE_DATE, todayStamp());
+            } catch (e) { /* ignore */ }
+        }
+
+        const natCountryMap = {
+            US: ['USA'],
+            CA: ['Canada'],
+            GB: ['UK'],
+            FR: ['France'],
+            DE: ['Germany'],
+            ES: ['Spain'],
+            IT: ['Italy'],
+            NL: ['Netherlands'],
+            BR: ['Brazil'],
+            AU: ['Australia'],
+            TR: ['Turkey'],
+            FI: ['Finland'],
+            DK: ['Denmark'],
+            NO: ['Norway'],
+            SE: ['Sweden'],
+            NZ: ['New Zealand'],
+            IE: ['Ireland']
+        };
+
+        async function fetchNamesDaily() {
+            const cachedDate = localStorage.getItem(NAME_CACHE_DATE);
+            if (cachedDate === todayStamp() && localStorage.getItem(NAME_CACHE_KEY)) {
+                nameCache = loadNameCache();
+                return;
+            }
+            try {
+                const resp = await fetch('https://randomuser.me/api/?results=4000&nat=us,ca,gb,fr,de,es,it,nl,br,au,tr,fi,dk,no,se,nz,ie');
+                const data = await resp.json();
+                const freshCache = { byCountry: {} };
+                (data.results || []).forEach(item => {
+                    const nat = (item.nat || '').toUpperCase();
+                    const targets = natCountryMap[nat];
+                    if (!targets) return;
+                    const first = (item.name?.first || '').replace(/[^a-zA-Z]+/g, '');
+                    const last = (item.name?.last || '').replace(/[^a-zA-Z]+/g, '');
+                    if (!first || !last) return;
+                    targets.forEach(country => {
+                        if (!freshCache.byCountry[country]) freshCache.byCountry[country] = { first: [], last: [] };
+                        freshCache.byCountry[country].first.push(first);
+                        freshCache.byCountry[country].last.push(last);
+                    });
+                });
+                nameCache = freshCache;
+                saveNameCache(freshCache);
+            } catch (e) {
+                nameCache = loadNameCache(); // fallback to any existing cache
+            }
+        }
+
+        function weightedPick(rng, items) {
+            const total = items.reduce((sum, item) => sum + item.weight, 0);
+            let roll = rng() * total;
+            for (const item of items) {
+                if ((roll -= item.weight) <= 0) return item;
+            }
+            return items[items.length - 1];
+        }
+
+        function pickCountryProfile(rng) {
+            return weightedPick(rng, countryProfiles);
+        }
+
+        function buildEmailUser(rng, first, last) {
+            const f = first.toLowerCase().replace(/\s+/g, '');
+            const l = last.toLowerCase().replace(/\s+/g, '');
+            const n = Math.floor(rng() * 900 + 100); // 3-digit
+            const patterns = [
+                { fn: () => `${f}.${l}${n}`, weight: 35 },
+                { fn: () => `${f}${n}`, weight: 20 },
+                { fn: () => `${f}${l[0]}${n}`, weight: 15 },
+                { fn: () => `${l}.${f}${n}`, weight: 10 },
+                { fn: () => `${f}${l}`, weight: 20 }
+            ];
+            const pick = weightedPick(rng, patterns);
+            return pick.fn();
+        }
+
+        function balanceForCountry(country, rng) {
+            const upper = [
+                'USA','Canada','UK','Germany','France','Netherlands','Sweden','Norway','Denmark','Finland',
+                'Australia','New Zealand','Singapore','UAE','Saudi Arabia'
+            ];
+            const mid = [
+                'Italy','Spain','Portugal','Belgium','Austria','Ireland','Poland','Czechia','Turkey','Japan',
+                'South Korea','Chile','Argentina','Russia','Greece','Brazil','Mexico'
+            ];
+            const lower = [
+                'Colombia','India','China','Thailand','Malaysia','Indonesia','Philippines','Vietnam','Pakistan',
+                'Egypt','Nigeria','Kenya','South Africa','Latvia'
+            ];
+            let min = 120, max = 500;
+            if (upper.includes(country)) { min = 400; max = 2800; }
+            else if (mid.includes(country)) { min = 220; max = 1800; }
+            else if (lower.includes(country)) { min = 80; max = 900; }
+            let val = min + Math.pow(rng(), 0.45) * (max - min);
+            const highChance = upper.includes(country) ? 0.018 : (mid.includes(country) ? 0.012 : 0.006);
+            if (rng() < highChance) {
+                const tierRoll = rng();
+                if (tierRoll < 0.72) {
+                    const highMin = 3000;
+                    const highMax = 6000;
+                    val = highMin + Math.pow(rng(), 0.55) * (highMax - highMin);
+                } else {
+                    const highMin = 6000;
+                    const highMax = 20000;
+                    val = highMin + Math.pow(rng(), 0.6) * (highMax - highMin);
+                }
+            }
+            return `$${val.toFixed(2)}`;
+        }
+
+        function roundToHalf(val) {
+            return Math.round(val * 2) / 2;
+        }
+
+        function formatPrice(val) {
+            const rounded = roundToHalf(val);
+            return Number.isInteger(rounded) ? `$${rounded.toFixed(0)}` : `$${rounded.toFixed(2)}`;
+        }
+
+        function priceForRow(balanceStr, brand, rng) {
+            const balVal = parseFloat(balanceStr.replace(/[^0-9.]/g, '')) || 0;
+            const brandFactor = { visa: 1, mc: 1, amex: 1.15, unionpay: 0.9, disc: 0.95 };
+            const bf = brandFactor[brand] || 1;
+            const scaled = Math.pow(balVal / 180, 0.85) * bf; // softer growth for higher balances
+            const base = Math.max(4.5, Math.min(38, scaled));
+            const jitter = (rng() - 0.5) * 4; // +/-2
+            return roundToHalf(Math.max(4.5, Math.min(45, base + jitter)));
+        }
+
+        function randomCardData(page, count = 12, seedBase, salt = 0) {
+            const rng = mulberry32(seedBase ^ (page * 2654435761) ^ (salt * 9973));
+            const rows = [];
+            for (let i = 0; i < count; i++) {
+                const profile = pickCountryProfile(rng);
+                const countryBias = {
+                    'USA': ['visa','mc','amex','disc'],
+                    'Canada': ['visa','mc','amex'],
+                    'UK': ['visa','mc','amex'],
+                    'Germany': ['visa','mc'],
+                    'France': ['visa','mc','amex'],
+                    'Italy': ['visa','mc'],
+                    'Spain': ['visa','mc'],
+                    'China': ['unionpay','visa','mc'],
+                    'India': ['visa','mc','amex'],
+                    'Japan': ['visa','mc','amex'],
+                    'Brazil': ['visa','mc'],
+                    'Mexico': ['visa','mc'],
+                    'Australia': ['visa','mc','amex'],
+                    'Singapore': ['visa','mc','amex','unionpay'],
+                    'UAE': ['visa','mc','amex','unionpay'],
+                };
+                const allowedBrands = countryBias[profile.country] || ['visa','mc'];
+                const brandPool = brandWeights.filter(b => allowedBrands.includes(b.logo));
+                const type = weightedPick(rng, brandPool.length ? brandPool : brandWeights);
+                const bankName = profile.banks[Math.floor(rng() * profile.banks.length)];
+                const bank = { name: bankName, country: profile.country };
+                const cachedNames = nameCache.byCountry[profile.country] || { first: [], last: [] };
+                const firstList = profile.firstNames
+                    .concat(extraFirstNames[profile.country] || [])
+                    .concat(cachedNames.first || []);
+                const lastList = profile.lastNames
+                    .concat(extraLastNames[profile.country] || [])
+                    .concat(cachedNames.last || []);
+                const first = firstList[Math.floor(rng() * firstList.length)];
+                const last = lastList[Math.floor(rng() * lastList.length)];
+                const holder = `${first[0]}***.${last[0]}.`;
+                const cardNumber = generateCardNumber(type.label, rng);
+                const balance = balanceForCountry(profile.country, rng);
+                const priceVal = priceForRow(balance, type.logo, rng);
+                const price = formatPrice(priceVal);
+                const exp = randomExpiry(rng);
+                const pickedDomain = weightedPick(rng, domainsWeighted).domain;
+                const emailUser = buildEmailUser(rng, first, last);
+                const email = `${emailUser}@${pickedDomain}`;
+                const maskChoices = [
+                    (first.slice(0, 3) || '').toLowerCase(),
+                    ((first.slice(0, 2) + (last[0] || '')).toLowerCase()),
+                    (((first[0] || '') + last.slice(0, 2)).toLowerCase()),
+                    (last.slice(0, 3) || '').toLowerCase()
+                ].filter(Boolean);
+                const maskVisible = maskChoices[Math.floor(rng() * maskChoices.length)] || emailUser.slice(0, 3);
+                const maskedEmail = maskEmail(email, maskVisible);
+                const extras = buildExtraIcons(rng);
+                rows.push({
+                    type,
+                    cardNumber,
+                    balance,
+                    price,
+                    priceVal,
+                    bank,
+                    holder,
+                    email,
+                    maskedEmail,
+                    extras,
+                    exp
+                });
+            }
+            return rows;
+        }
+
+        function randomRange(rng, min, max) {
+            return Math.floor(rng() * (max - min + 1)) + min;
+        }
+
+        function formatCardNumber(raw) {
+            return String(raw).replace(/(.{4})/g, '$1 ').trim();
+        }
+
+        function buildNumberFromPrefix(prefix, totalLength, rng) {
+            const remaining = totalLength - prefix.length;
+            const rest = String(Math.floor(rng() * Math.pow(10, remaining))).padStart(remaining, '0');
+            return formatCardNumber(`${prefix}${rest}`);
+        }
+
+        function randomizeBinPrefix(bin, rng) {
+            const base = String(bin || '').slice(0, 3);
+            const tail = String(Math.floor(rng() * 1000)).padStart(3, '0');
+            return `${base}${tail}`;
+        }
+
+        function generateCardNumber(type, rng) {
+            // Generate realistic BIN prefixes and lengths per network
+            if (type === 'Amex') {
+                if (seededBins.amex.length && rng() < 0.6) {
+                    const seed = seededBins.amex[Math.floor(rng() * seededBins.amex.length)];
+                    const prefix = randomizeBinPrefix(seed, rng);
+                    return buildNumberFromPrefix(prefix, 15, rng);
+                }
+                const start = rng() < 0.5 ? '34' : '37';
+                const mid = String(Math.floor(rng() * 1e6)).padStart(6, '0');
+                const end = String(Math.floor(rng() * 1e5)).padStart(5, '0');
+                return formatCardNumber(`${start}${mid}${end}`); // 15 digits
+            }
+            if (type === 'Discover') {
+                const discoverPrefixes = [
+                    '6011',
+                    '65' + String(randomRange(rng, 0, 99)).padStart(2, '0'),
+                    String(randomRange(rng, 644, 649)),
+                    String(randomRange(rng, 622126, 622925))
+                ];
+                const prefix = discoverPrefixes[Math.floor(rng() * discoverPrefixes.length)];
+                const totalLength = 16;
+                const remaining = totalLength - prefix.length;
+                const rest = String(Math.floor(rng() * Math.pow(10, remaining))).padStart(remaining, '0');
+                return formatCardNumber(`${prefix}${rest}`);
+            }
+            if (type === 'UnionPay') {
+                const prefix = '62' + String(randomRange(rng, 0, 999)).padStart(3, '0');
+                const totalLength = randomRange(rng, 16, 19);
+                const remaining = totalLength - prefix.length;
+                const rest = String(Math.floor(rng() * Math.pow(10, remaining))).padStart(remaining, '0');
+                return formatCardNumber(`${prefix}${rest}`);
+            }
+            if (type === 'Mastercard') {
+                if (seededBins.mc.length && rng() < 0.55) {
+                    const seed = seededBins.mc[Math.floor(rng() * seededBins.mc.length)];
+                    const prefix = randomizeBinPrefix(seed, rng);
+                    return buildNumberFromPrefix(prefix, 16, rng);
+                }
+                const mcPrefixes = [
+                    '51','52','53','54','55',
+                    ...Array.from({length: 500}, (_, idx) => String(2221 + idx)) // 2221-2720
+                ];
+                const prefix = mcPrefixes[Math.floor(rng() * mcPrefixes.length)];
+                const totalLength = 16;
+                const remaining = totalLength - prefix.length;
+                const rest = String(Math.floor(rng() * Math.pow(10, remaining))).padStart(remaining, '0');
+                return formatCardNumber(`${prefix}${rest}`);
+            }
+            // Visa default (16-digit common format)
+            if (seededBins.visa.length && rng() < 0.55) {
+                const seed = seededBins.visa[Math.floor(rng() * seededBins.visa.length)];
+                const prefix = randomizeBinPrefix(seed, rng);
+                return buildNumberFromPrefix(prefix, 16, rng);
+            }
+            return buildNumberFromPrefix('4', 16, rng);
+        }
+
+        function randomExpiry(rng) {
+            const now = new Date();
+            const month = String(Math.floor(rng()*12)+1).padStart(2,'0');
+            const year = String((now.getFullYear() % 100) + Math.floor(rng()*5)+1).padStart(2,'0');
+            return `${month}/${year}`;
+        }
+
+        const perPage = 12;
+        const totalPages = 115498;
+        const STORAGE_SEED = 'rar_shop_seed';
+        const STORAGE_SEED_DATE = 'rar_shop_seed_date';
+        const todayStamp = () => new Date().toISOString().slice(0,10);
+        const filters = { brand: 'all', country: 'all', bin: '', bank: '', exp: '', price: 'all', balance: 'all' };
+        const FILTER_POOL_SIZE = 200000;
+        const FILTER_POOL_SALT = 0x9e3779b9;
+        let basePool = null;
+        let filteredCache = { key: '', rows: [] };
+
+        function loadSeed() {
+            try {
+                const savedDate = localStorage.getItem(STORAGE_SEED_DATE);
+                const savedSeed = localStorage.getItem(STORAGE_SEED);
+                if (savedDate === todayStamp() && savedSeed) return parseInt(savedSeed, 10);
+            } catch (e) { /* ignore */ }
+            return null;
+        }
+
+        function saveSeed(seed) {
+            try {
+                localStorage.setItem(STORAGE_SEED, String(seed));
+                localStorage.setItem(STORAGE_SEED_DATE, todayStamp());
+            } catch (e) { /* ignore */ }
+        }
+
+        let dailySeed = loadSeed();
+        if (!dailySeed) {
+            dailySeed = Math.floor(Math.random() * 1e9);
+            saveSeed(dailySeed);
+        }
+
+        let currentPage = 1;
+
+        function getBasePool() {
+            if (!basePool) basePool = randomCardData(1, FILTER_POOL_SIZE, dailySeed ^ FILTER_POOL_SALT, 0);
+            return basePool;
+        }
+
+        function filterKey() {
+            return JSON.stringify({ filters, seed: dailySeed, perPage });
+        }
+
+        function renderTable(page = 1) {
+            const tbody = document.querySelector('#card-table tbody');
+            tbody.innerHTML = '';
+            const hasActiveFilters = filters.brand !== 'all' || filters.country !== 'all' || filters.bin || filters.bank || filters.exp || filters.price !== 'all' || filters.balance !== 'all';
+            const applyFilters = row => {
+                const brandOk = filters.brand === 'all' || row.type.logo === filters.brand;
+                const countryOk = filters.country === 'all' || row.bank.country === filters.country;
+                const binOk = !filters.bin || row.cardNumber.replace(/\s+/g, '').startsWith(filters.bin.replace(/\s+/g, ''));
+                const bankOk = !filters.bank || row.bank.name.toLowerCase().includes(filters.bank.toLowerCase());
+                const expOk = !filters.exp || row.exp.startsWith(filters.exp);
+                const priceVal = row.priceVal || parseFloat(row.price.replace(/[^0-9.]/g, '')) || 0;
+                const balVal = parseFloat(row.balance.replace(/[^0-9.]/g, '')) || 0;
+                let priceOk = true;
+                if (filters.price === 'under15') priceOk = priceVal < 15;
+                else if (filters.price === '15to18') priceOk = priceVal >= 15 && priceVal <= 18;
+                else if (filters.price === '18plus') priceOk = priceVal > 18;
+                let balOk = true;
+                if (filters.balance === 'under400') balOk = balVal < 400;
+                else if (filters.balance === '400to500') balOk = balVal >= 400 && balVal <= 500;
+                else if (filters.balance === '500plus') balOk = balVal > 500;
+                return brandOk && countryOk && binOk && bankOk && expOk && priceOk && balOk;
+            };
+
+            let displayRows = [];
+            let filteredTotalPages = 1;
+
+            if (hasActiveFilters) {
+                const key = filterKey();
+                if (filteredCache.key !== key) {
+                    const pool = getBasePool();
+                    filteredCache = { key, rows: pool.filter(applyFilters) };
+                }
+                filteredTotalPages = Math.max(1, Math.ceil(filteredCache.rows.length / perPage));
+                currentPage = Math.min(currentPage, filteredTotalPages);
+                const start = (currentPage - 1) * perPage;
+                displayRows = filteredCache.rows.slice(start, start + perPage);
+            } else {
+                let filtered = [];
+                for (let salt = 0; salt < 12 && filtered.length < perPage; salt++) {
+                    const batch = randomCardData(page, perPage * 80, dailySeed, salt);
+                    const hits = batch.filter(applyFilters);
+                    filtered = filtered.concat(hits);
+                }
+                let salt = 12;
+                while (filtered.length < perPage && salt < 25) {
+                    const batch = randomCardData(page, perPage * 120, dailySeed, salt);
+                    const hits = batch.filter(applyFilters);
+                    filtered = filtered.concat(hits);
+                    salt++;
+                }
+                displayRows = filtered.slice(0, perPage);
+                filteredTotalPages = computeFilteredPages();
+                currentPage = Math.min(currentPage, filteredTotalPages);
+            }
+
+            if (!displayRows.length) {
+                const tr = document.createElement('tr');
+                const td = document.createElement('td');
+                td.colSpan = 9;
+                td.className = 'muted';
+                td.textContent = 'No cards match these filters on this page.';
+                tr.appendChild(td);
+                tbody.appendChild(tr);
+                renderPagination(filteredTotalPages);
+                return;
+            }
+
+            displayRows.forEach(row => {
+                const tr = document.createElement('tr');
+                const virtualBin = isVirtualBin(row.cardNumber);
+                tr.innerHTML = `
+                    <td data-label="Type"><span class="card-type">${brandIcon(row.type.logo)}${row.type.label}</span></td>
+                    <td data-label="Card Number">${maskCard(row.cardNumber)}</td>
+                    <td data-label="Balance">${row.balance}</td>
+                    <td data-label="Price" class="price-text">${row.price}</td>
+                    <td data-label="Bank">${row.bank.name}<div class="muted-small">${row.bank.country}</div></td>
+                    <td data-label="Holder">${row.extras.includes('user') ? row.holder : '---'}</td>
+                    <td data-label="Email">${renderExtraIcons(row.extras, virtualBin)}</td>
+                    <td data-label="Expires">${row.exp}</td>
+                    <td data-label="Action"><button class="buy-btn" type="button">Purchase</button></td>
+                `;
+                tbody.appendChild(tr);
+            });
+            renderPagination(filteredTotalPages);
+        }
+
+        function computeFilteredPages() {
+            const totalRows = totalPages * perPage;
+            const totalBrandWeight = brandWeights.reduce((s, b) => s + b.weight, 0);
+            const brandWeight = filters.brand === 'all' ? totalBrandWeight : (brandWeights.find(b => b.logo === filters.brand)?.weight || 0);
+            const brandRatio = brandWeight && totalBrandWeight ? brandWeight / totalBrandWeight : 0;
+
+            const totalCountryWeight = countryProfiles.reduce((s, c) => s + c.weight, 0);
+            const countryWeight = filters.country === 'all' ? totalCountryWeight : (countryProfiles.find(c => c.country === filters.country)?.weight || 0);
+            const countryRatio = countryWeight && totalCountryWeight ? countryWeight / totalCountryWeight : 0;
+
+            let extraFactor = 1;
+            if (filters.bin) extraFactor *= 0.25;
+            if (filters.bank) extraFactor *= 0.35;
+            if (filters.exp) extraFactor *= 0.4;
+            if (filters.price !== 'all') extraFactor *= 0.7;
+            if (filters.balance !== 'all') extraFactor *= 0.7;
+
+            const estimatedRows = Math.max(1, totalRows * (brandRatio || 0.0005) * (countryRatio || 0.0005) * extraFactor);
+            const estimatedPages = Math.max(1, Math.ceil(estimatedRows / perPage));
+            return estimatedPages;
+        }
+
+        function renderPagination(total) {
+            const container = document.getElementById('pagination');
+            container.innerHTML = '';
+            const windowSize = 10;
+            const addBtn = (label, page, disabled = false, isActive = false) => {
+                const btn = document.createElement('button');
+                btn.className = `page-btn ${isActive ? 'active' : ''} ${disabled ? 'disabled' : ''}`;
+                btn.textContent = label;
+                if (!disabled) btn.addEventListener('click', () => { currentPage = page; renderTable(currentPage); });
+                container.appendChild(btn);
+            };
+            const addDots = () => {
+                const span = document.createElement('span');
+                span.className = 'dots';
+                span.textContent = '...';
+                container.appendChild(span);
+            };
+
+            const prevPage = Math.max(1, currentPage - 1);
+            const nextPage = Math.min(total, currentPage + 1);
+
+            addBtn('Prev', prevPage, currentPage === 1);
+
+            let start = Math.max(1, currentPage - Math.floor(windowSize / 2));
+            let end = start + windowSize - 1;
+            if (end > total) {
+                end = total;
+                start = Math.max(1, end - windowSize + 1);
+            }
+
+            if (start > 1) {
+                addBtn('1', 1, false, currentPage === 1);
+                if (start > 2) addDots();
+            }
+
+            for (let i = start; i <= end; i++) {
+                addBtn(String(i), i, false, i === currentPage);
+            }
+
+            if (end < total) {
+                if (end < total - 1) addDots();
+                addBtn(String(total), total, false, currentPage === total);
+            }
+
+            addBtn('Next', nextPage, currentPage === total);
+        }
+
+        document.getElementById('filter-brand').addEventListener('change', e => { filters.brand = e.target.value; currentPage = 1; renderTable(currentPage); });
+        document.getElementById('filter-country').addEventListener('change', e => { filters.country = e.target.value; currentPage = 1; renderTable(currentPage); });
+        document.getElementById('filter-bin').addEventListener('input', e => { filters.bin = e.target.value.trim(); currentPage = 1; renderTable(currentPage); });
+        document.getElementById('filter-bank').addEventListener('input', e => { filters.bank = e.target.value.trim(); currentPage = 1; renderTable(currentPage); });
+        document.getElementById('filter-exp').addEventListener('input', e => { filters.exp = e.target.value.trim(); currentPage = 1; renderTable(currentPage); });
+        document.getElementById('filter-price').addEventListener('change', e => { filters.price = e.target.value; currentPage = 1; renderTable(currentPage); });
+        document.getElementById('filter-balance').addEventListener('change', e => { filters.balance = e.target.value; currentPage = 1; renderTable(currentPage); });
+
+        async function initShop() {
+            nameCache = loadNameCache();
+            await fetchNamesDaily();
+            renderTable();
+        }
+        initShop();
+
+        document.addEventListener('click', (event) => {
+            const btn = event.target.closest('.buy-btn');
+            if (!btn) return;
+            const row = btn.closest('tr');
+            if (!row) return;
+            const priceCell = row.querySelector('td[data-label="Price"]');
+            const priceVal = priceCell ? parseFloat(priceCell.textContent.replace(/[^0-9.]/g, '')) : 0;
+            const balanceVal = getBalanceAmount();
+            if (balanceVal < priceVal) {
+                event.preventDefault();
+                showBalancePopup(true);
+                return;
+            }
+            if (balanceVal < 100) {
+                event.preventDefault();
+                showActivationPopup(true);
+            }
+        });
+
+        const popupClose = document.getElementById('popup-close');
+        if (popupClose) popupClose.addEventListener('click', () => showBalancePopup(false));
+        const popupTopup = document.getElementById('popup-topup');
+        if (popupTopup) popupTopup.addEventListener('click', () => {
+            window.location.href = 'topup.html';
+        });
+        const activationClose = document.getElementById('activation-close');
+        if (activationClose) activationClose.addEventListener('click', () => showActivationPopup(false));
+        const activationTopup = document.getElementById('activation-topup');
+        if (activationTopup) activationTopup.addEventListener('click', () => {
+            window.location.href = 'topup.html';
+        });
+
+        // Mobile navbar toggle
+        (function () {
+            const toggle = document.querySelector('.nav-toggle');
+            const links = document.querySelector('.nav-links');
+            if (!toggle || !links) return;
+            toggle.addEventListener('click', () => {
+                const open = links.classList.toggle('open');
+                toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            });
+            links.querySelectorAll('a').forEach(a => {
+                a.addEventListener('click', () => {
+                    links.classList.remove('open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                });
+            });
+        })();
+    </script>
+    <footer class="footer">realandrare.bid</footer>
+</body>
+</html>

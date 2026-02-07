@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RealAndRare - Orders</title>
+    <link rel="canonical" href="https://realandrare.bid/orders.html">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preload" as="image" href="img/rare.webp">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Organization",
+                "name": "RealAndRare",
+                "url": "https://realandrare.bid/",
+                "logo": "https://realandrare.bid/resources/logo/gold.png"
+            },
+            {
+                "@type": "WebSite",
+                "name": "RealAndRare",
+                "url": "https://realandrare.bid/"
+            }
+        ]
+    }
+    </script>
+    <link rel="stylesheet" href="resources/css/app.min.css">
+    <style>
+        body { background: linear-gradient(120deg, rgba(0,0,0,0.55), rgba(0,0,0,0.25)), url("img/rare.webp") center/cover fixed; color: #f1f1f1; font-family: 'Nunito', sans-serif; }
+        .navbar { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; background: radial-gradient(circle at 10% 20%, rgba(216,180,1,0.12), rgba(0,0,0,0.7)), radial-gradient(circle at 90% 10%, rgba(255,255,255,0.08), rgba(0,0,0,0.8)); border-bottom: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); position: relative; z-index: 1200; overflow: visible; }
+        .nav-toggle { display: none; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.12); background: rgba(255, 255, 255, 0.06); color: #f1f1f1; cursor: pointer; }
+        .nav-toggle:hover { border-color: rgba(216,180,1,0.35); } .nav-toggle svg { width: 22px; height: 22px; }
+        .nav-links a { display: inline-flex; align-items: center; gap: 8px; margin-right: 18px; color: #f1f1f1; text-decoration: none; font-weight: 600; }
+        .nav-links a:last-child { margin-right: 0; } .nav-links a:hover { color: #d8b401; }
+        .nav-links svg { width: 16px; height: 16px; }
+        .right { display: flex; align-items: center; gap: 18px; } .profile { display: flex; align-items: center; gap: 12px; }
+        .profile svg { width: 40px; height: 40px; padding: 8px; border-radius: 50%; background: rgba(255, 255, 255, 0.08); }
+        .meta { display: grid; grid-template-columns: repeat(2, minmax(110px, auto)); gap: 8px 16px; align-items: center; }
+        .badge { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 8px 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; color: #f1f1f1; }
+        .topup-btn { display: inline-flex; align-items: center; justify-content: center; padding: 8px 12px; border-radius: 10px; background: #d8b401; color: #000; font-weight: 800; text-decoration: none; border: 1px solid rgba(0,0,0,0.2); white-space: nowrap; }
+        .topup-btn:hover { background: #f1d23a; }
+        .btc-icon { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; background: #f7931a; color: #000; font-weight: 800; font-size: 11px; }
+        .label { opacity: 0.75; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; }
+        .muted { opacity: 0.8; font-size: 13px; }
+        .content { padding: 28px; display: grid; gap: 16px; max-width: 1200px; width: 100%; margin: 0 auto; }
+        .card { background: rgba(0, 0, 0, 0.35); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 18px 20px; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+        .card h2 { margin: 0 0 6px 0; }
+        table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+        th, td { padding: 10px; text-align: left; }
+        th { background: rgba(255,255,255,0.04); }
+        tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+        tr td { border-bottom: 1px solid rgba(255,255,255,0.06); }
+        .footer { text-align: center; padding: 18px 12px 26px; color: rgba(241,241,241,0.7); font-size: 12px; letter-spacing: 0.6px; }
+        @media (max-width: 768px) {
+            /* One-line top row + in-flow hamburger menu that pushes content down */
+            .navbar { position: relative; display: flex !important; align-items: center; justify-content: space-between; gap: 10px; padding: 0 12px; min-height: 56px; height: auto; flex-wrap: wrap !important; }
+            .navbar .nav-toggle, .nav-toggle { display: inline-flex; flex: 0 0 auto; width: 36px; height: 36px; border-radius: 10px; order: 1; }
+            .navbar .right, .right { display: flex; align-items: center; justify-content: flex-end; gap: 10px; flex-wrap: nowrap !important; min-width: 0; flex: 1 1 auto; width: auto; order: 2; }
+
+            /* app.min.css sets `.profile { margin-top: 75px }` on mobile; override for navbar */
+            .navbar .profile { margin-top: 0 !important; text-align: left !important; min-width: 0; gap: 8px; height: 36px; padding: 6px 10px; border-radius: 12px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); align-items: center; align-self: center; }
+            .navbar .profile svg { width: 18px; height: 18px; padding: 0; display: block; background: transparent !important; }
+            .navbar .profile > div { display: flex; align-items: center; }
+            .navbar .profile .muted { display: none; }
+            .navbar #username { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 90px; line-height: 1; }
+
+            .navbar .meta, .meta { display: flex; align-items: center; gap: 8px; flex-wrap: nowrap; width: auto; }
+            .navbar .meta > div { display: flex; flex-direction: column; }
+            .navbar .meta .label { display: none; }
+            .navbar .badge { padding: 6px 10px; font-size: 12px; white-space: nowrap; line-height: 1; height: 36px; border-radius: 12px; }
+            .navbar .btc-icon { width: 16px; height: 16px; font-size: 10px; }
+            .navbar .topup-btn { padding: 6px 10px; font-size: 12px; height: 36px; border-radius: 12px; }
+
+            /* Menu opens under the top row (in-flow), pushing content down */
+            .navbar .nav-links { display: none; width: 100%; order: 3; position: static; flex-direction: column; gap: 8px; padding: 10px; margin: 0 0 10px 0; border-radius: 12px; background: rgba(0, 0, 0, 0.55); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+            .navbar .nav-links.open { display: flex; }
+            .navbar .nav-links a { margin-right: 0; padding: 10px 10px; border-radius: 10px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); }
+            .content { padding: 10px 12px 14px; }
+        }
+        @media (max-width: 420px) {
+            .navbar { gap: 8px; padding: 0 10px; min-height: 52px; }
+            .navbar .right { gap: 8px; }
+            .navbar .badge { padding: 5px 8px; font-size: 11px; height: 34px; border-radius: 12px; }
+            .navbar .profile { padding: 5px 8px; height: 34px; }
+            .navbar .topup-btn { padding: 5px 8px; font-size: 11px; height: 34px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 6h16"></path>
+                <path d="M4 12h16"></path>
+                <path d="M4 18h16"></path>
+            </svg>
+        </button>
+        <div class="nav-links">
+            <a href="shop.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 7h12l-1 12H7L6 7z"></path><path d="M9 7V5a3 3 0 0 1 6 0v2"></path>
+                </svg>
+                Shop
+            </a>
+            <a href="dumps.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <ellipse cx="12" cy="5" rx="7" ry="3"></ellipse><path d="M5 5v6c0 1.6 3.1 3 7 3s7-1.4 7-3V5"></path><path d="M5 11v6c0 1.6 3.1 3 7 3s7-1.4 7-3v-6"></path>
+                </svg>
+                Dumps
+            </a>
+            <a href="checkers.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="m9 12 2 2 4-4"></path>
+                </svg>
+                Checkers
+            </a>
+            <a href="orders.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M7 5h10"></path><path d="M7 9h10"></path><path d="M7 13h6"></path><rect x="5" y="3" width="14" height="18" rx="2"></rect>
+                </svg>
+                Orders
+            </a>
+            <a href="support.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 9a7 7 0 0 1 14 0v6a4 4 0 0 1-4 4h-1"></path><path d="M5 13v2a4 4 0 0 0 4 4h1"></path><path d="M8 21h3"></path><path d="M18 13h2"></path><path d="M4 13H2"></path>
+                </svg>
+                Support
+            </a>
+            <a href="dashboard.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect>
+                </svg>
+                Dashboard
+            </a>
+        </div>
+        <div class="right">
+            <div class="profile">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#d8b401" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="7" r="4"></circle>
+                    <path d="M5 21c0-4 3-7 7-7s7 3 7 7"></path>
+                </svg>
+                <div>
+                    <div id="username" style="font-weight:700;">User</div>
+                    <div class="muted">Orders</div>
+                </div>
+            </div>
+            <div class="meta">
+                <div>
+                    <div class="label">Bitcoin</div>
+                    <div class="badge" id="btc-price"><span class="btc-icon">฿</span> $--.--</div>
+                </div>
+                <div>
+                    <div class="label">Balance</div>
+                    <div class="badge" id="balance">$0.00</div>
+                </div>
+            </div>
+            <a class="topup-btn" href="topup.html">Top up</a>
+        </div>
+    </nav>
+
+    <div class="content">
+        <div class="card">
+            <h2>Your Orders</h2>
+            <div class="muted" style="margin-top:10px;">You haven’t purchased anything yet. Browse the <a href="shop.html" style="color:#d8b401;">shop</a> to get started.</div>
+            <table>
+                <thead>
+                    <tr><th>ID</th><th>Product</th><th>Status</th><th>Price</th><th>Download</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td colspan="5" style="opacity:0.75;">No orders yet.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        const storedUser = localStorage.getItem('rar_username') || 'User';
+        document.getElementById('username').textContent = storedUser;
+        const storedBalance = localStorage.getItem('rar_balance') || '0.00';
+        document.getElementById('balance').textContent = `$${storedBalance}`;
+        function fetchBtc() {
+            const target = document.getElementById('btc-price');
+            const update = rate => {
+                if (rate) {
+                    target.innerHTML = `<span class="btc-icon">฿</span> $${rate.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
+                    return true;
+                }
+                return false;
+            };
+            fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd')
+                .then(res => res.json())
+                .then(data => {
+                    if (update(data?.bitcoin?.usd)) return;
+                    throw new Error('no rate');
+                })
+                .catch(() => {
+                    fetch('https://api.coindesk.com/v1/bpi/currentprice/USD.json')
+                        .then(res => res.json())
+                        .then(data => {
+                            if (update(data?.bpi?.USD?.rate_float)) return;
+                            target.textContent = 'Unavailable';
+                        })
+                        .catch(() => { target.textContent = 'Unavailable'; });
+                });
+        }
+        fetchBtc();
+        setInterval(fetchBtc, 60000);
+
+        // Mobile navbar toggle
+        (function () {
+            const toggle = document.querySelector('.nav-toggle');
+            const links = document.querySelector('.nav-links');
+            if (!toggle || !links) return;
+            toggle.addEventListener('click', () => {
+                const open = links.classList.toggle('open');
+                toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            });
+            links.querySelectorAll('a').forEach(a => {
+                a.addEventListener('click', () => {
+                    links.classList.remove('open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                });
+            });
+        })();
+    </script>
+    <footer class="footer">realandrare.bid</footer>
+</body>
+</html>
+

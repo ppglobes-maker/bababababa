@@ -586,7 +586,7 @@
         // Sync wallet balance from backend if available
         (function () {
             const userId = storedUser;
-            fetch('/api/user/' + encodeURIComponent(userId))
+            fetch('https://api.realandrare.bar/api/user/' + encodeURIComponent(userId))
                 .then(res => res.json())
                 .then(data => {
                     if (!data || typeof data.balance_usd !== 'number') return;

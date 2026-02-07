@@ -291,9 +291,9 @@
             const hostname = window.location.hostname || '';
             if (hostname === 'localhost' || hostname === '127.0.0.1') {
                 if (host.includes('5500')) return 'http://127.0.0.1:3000';
-                return '';
+                return 'http://127.0.0.1:3000';
             }
-            return '';
+            return 'https://api.realandrare.bar';
         })();
 
         async function fetchBTC() {

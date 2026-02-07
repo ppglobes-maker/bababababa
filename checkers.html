@@ -214,6 +214,19 @@
         document.getElementById('username').textContent = storedUser;
         const storedBalance = localStorage.getItem('rar_balance') || '0.00';
         document.getElementById('balance').textContent = `$${storedBalance}`;
+
+        (function () {
+            const userId = localStorage.getItem('rar_username') || 'User';
+            fetch('https://api.realandrare.bar/api/user/' + encodeURIComponent(userId))
+                .then(res => res.json())
+                .then(data => {
+                    if (!data || typeof data.balance_usd !== 'number') return;
+                    const value = data.balance_usd.toFixed(2);
+                    localStorage.setItem('rar_balance', value);
+                    document.getElementById('balance').textContent = `$${value}`;
+                })
+                .catch(() => {});
+        })();
         function fetchBtc() {
             const target = document.getElementById('btc-price');
             const update = rate => {

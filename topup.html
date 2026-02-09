@@ -447,9 +447,11 @@
         }
 
         (async function initTopup() {
-            const displayName = localStorage.getItem('rar_username') || 'User';
+            const displayName = localStorage.getItem('rar_username');
+            if (!displayName) { window.location.href = 'index.html'; return; }
+            const displayNameSafe = displayName || 'User';
             const userLabel = document.getElementById('username');
-            if (userLabel) userLabel.textContent = displayName;
+            if (userLabel) userLabel.textContent = displayNameSafe;
 
             const cached = loadPaymentCache();
             if (cached) { setDetails(cached); setStatus('Address ready'); }

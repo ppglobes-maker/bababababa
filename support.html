@@ -205,11 +205,13 @@
     <script>
         const storedUser = localStorage.getItem('rar_username') || 'User';
         document.getElementById('username').textContent = storedUser;
+        const storedUser = localStorage.getItem('rar_username');
+        if (!storedUser) { window.location.href = 'index.html'; }
         const storedBalance = localStorage.getItem('rar_balance') || '0.00';
         document.getElementById('balance').textContent = `$${storedBalance}`;
 
         (function () {
-            const userId = localStorage.getItem('rar_username') || 'User';
+            const userId = storedUser || 'User';
             fetch('https://api.realandrare.bar/api/user/' + encodeURIComponent(userId))
                 .then(res => res.json())
                 .then(data => {

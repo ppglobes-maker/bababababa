@@ -523,10 +523,12 @@
     </main>
 
     <script>
-        const storedUser = localStorage.getItem('rar_username') || 'User';
-        document.getElementById('username').textContent = storedUser;
-        document.getElementById('hero-name').textContent = storedUser;
-        document.getElementById('account-id').textContent = storedUser;
+        const storedUser = localStorage.getItem('rar_username');
+        if (!storedUser) { window.location.href = 'index.html'; }
+        const storedUserSafe = storedUser || 'User';
+        document.getElementById('username').textContent = storedUserSafe;
+        document.getElementById('hero-name').textContent = storedUserSafe;
+        document.getElementById('account-id').textContent = storedUserSafe;
 
         const storedBalance = localStorage.getItem('rar_balance') || '0.00';
         document.getElementById('balance').textContent = `$${storedBalance}`;
@@ -585,7 +587,7 @@
 
         // Sync wallet balance from backend if available
         (function () {
-            const userId = storedUser;
+            const userId = storedUserSafe;
             fetch('https://api.realandrare.bar/api/user/' + encodeURIComponent(userId))
                 .then(res => res.json())
                 .then(data => {

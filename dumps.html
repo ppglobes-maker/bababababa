@@ -267,10 +267,9 @@
     </div>
 
     <script>
-        const storedUser = localStorage.getItem('rar_username') || 'User';
-        document.getElementById('username').textContent = storedUser;
         const storedUser = localStorage.getItem('rar_username');
         if (!storedUser) { window.location.href = 'index.html'; }
+        document.getElementById('username').textContent = storedUser || 'User';
         const storedBalance = localStorage.getItem('rar_balance') || '0.00';
         document.getElementById('balance').textContent = `$${storedBalance}`;
 

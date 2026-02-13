@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RealAndRare - Checkers</title>
-    <link rel="canonical" href="https://realandrare.bid/checkers.html">
+    <link rel="canonical" href="https://realandrare.bar/checkers.html">
     <meta name="robots" content="noindex, nofollow">
     <link rel="preload" as="image" href="img/rare.webp">
     <script type="application/ld+json">
@@ -14,13 +14,13 @@
             {
                 "@type": "Organization",
                 "name": "RealAndRare",
-                "url": "https://realandrare.bid/",
-                "logo": "https://realandrare.bid/resources/logo/gold.png"
+                "url": "https://realandrare.bar/",
+                "logo": "https://realandrare.bar/resources/logo/gold.png"
             },
             {
                 "@type": "WebSite",
                 "name": "RealAndRare",
-                "url": "https://realandrare.bid/"
+                "url": "https://realandrare.bar/"
             }
         ]
     }
@@ -230,27 +230,37 @@
         })();
         function fetchBtc() {
             const target = document.getElementById('btc-price');
-            const update = rate => {
-                if (rate) {
-                    target.innerHTML = `<span class="btc-icon">฿</span> $${rate.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
-                    return true;
-                }
-                return false;
+            const BTC_CACHE_KEY = 'rar_btc_usd';
+            const render = rate => {
+                target.innerHTML = `<span class="btc-icon">฿</span> $${rate.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
             };
+            const persistAndRender = rate => {
+                const parsed = Number(rate);
+                if (!parsed || !Number.isFinite(parsed)) return false;
+                localStorage.setItem(BTC_CACHE_KEY, String(parsed));
+                render(parsed);
+                return true;
+            };
+            const cached = Number(localStorage.getItem(BTC_CACHE_KEY) || 0);
+            if (cached > 0 && Number.isFinite(cached)) {
+                render(cached);
+            }
             fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd')
                 .then(res => res.json())
                 .then(data => {
-                    if (update(data?.bitcoin?.usd)) return;
+                    if (persistAndRender(data?.bitcoin?.usd)) return;
                     throw new Error('no rate');
                 })
                 .catch(() => {
                     fetch('https://api.coindesk.com/v1/bpi/currentprice/USD.json')
                         .then(res => res.json())
                         .then(data => {
-                            if (update(data?.bpi?.USD?.rate_float)) return;
-                            target.textContent = 'Unavailable';
+                            if (persistAndRender(data?.bpi?.USD?.rate_float)) return;
+                            if (!(cached > 0 && Number.isFinite(cached))) target.textContent = 'Unavailable';
                         })
-                        .catch(() => { target.textContent = 'Unavailable'; });
+                        .catch(() => {
+                            if (!(cached > 0 && Number.isFinite(cached))) target.textContent = 'Unavailable';
+                        });
                 });
         }
         fetchBtc();
@@ -287,7 +297,7 @@
             checkerPopupClose.addEventListener('click', () => showCheckerPopup(false));
         }
     </script>
-    <footer class="footer">realandrare.bid</footer>
+    <footer class="footer">realandrare.bar</footer>
 </body>
 </html>
 

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RealAndRare - Top Up</title>
-    <link rel="canonical" href="https://realandrare.bid/topup.html">
+    <link rel="canonical" href="https://realandrare.bar/topup.html">
     <meta name="robots" content="noindex, nofollow">
     <meta name="theme-color" content="#111111">
     <link rel="preload" as="image" href="img/rare.webp">
@@ -15,13 +15,13 @@
             {
                 "@type": "Organization",
                 "name": "RealAndRare",
-                "url": "https://realandrare.bid/",
-                "logo": "https://realandrare.bid/resources/logo/gold.png"
+                "url": "https://realandrare.bar/",
+                "logo": "https://realandrare.bar/resources/logo/gold.png"
             },
             {
                 "@type": "WebSite",
                 "name": "RealAndRare",
-                "url": "https://realandrare.bid/"
+                "url": "https://realandrare.bar/"
             }
         ]
     }
@@ -298,21 +298,40 @@
 
         async function fetchBTC() {
             const badge = document.getElementById('btc-price');
+            const BTC_CACHE_KEY = 'rar_btc_usd';
+            const render = rate => {
+                badge.innerHTML = '<span class="btc-icon">฿</span> $' + rate.toLocaleString(undefined, { maximumFractionDigits: 2 });
+            };
+            const cached = Number(localStorage.getItem(BTC_CACHE_KEY) || 0);
+            if (cached > 0 && Number.isFinite(cached)) {
+                render(cached);
+            }
             try {
                 const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
                 const data = await res.json();
-                const price = data?.bitcoin?.usd;
-                if (price) { badge.innerHTML = '<span class="btc-icon">฿</span> $' + price.toLocaleString(); return; }
-            } catch(e){}
+                const price = Number(data?.bitcoin?.usd || 0);
+                if (price > 0 && Number.isFinite(price)) {
+                    localStorage.setItem(BTC_CACHE_KEY, String(price));
+                    render(price);
+                    return;
+                }
+            } catch (e) {}
             try {
                 const res2 = await fetch('https://api.coindesk.com/v1/bpi/currentprice/USD.json');
                 const data2 = await res2.json();
-                const price = data2?.bpi?.USD?.rate_float;
-                if (price) { badge.innerHTML = '<span class="btc-icon">฿</span> $' + Math.round(price).toLocaleString(); return; }
-            } catch(e){}
-            badge.textContent = '฿ $--.--';
+                const price = Number(data2?.bpi?.USD?.rate_float || 0);
+                if (price > 0 && Number.isFinite(price)) {
+                    localStorage.setItem(BTC_CACHE_KEY, String(price));
+                    render(price);
+                    return;
+                }
+            } catch (e) {}
+            if (!(cached > 0 && Number.isFinite(cached))) {
+                badge.textContent = 'Unavailable';
+            }
         }
         fetchBTC();
+        setInterval(fetchBTC, 60000);
 
         const storageKey = 'rar_topup_payment_v2';
         const userKey = 'rar_user_id';
@@ -497,7 +516,7 @@
             });
         })();
     </script>
-    <footer class="footer">realandrare.bid</footer>
+    <footer class="footer">realandrare.bar</footer>
 </body>
 </html>
 
